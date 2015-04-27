@@ -1,0 +1,39 @@
+<%= form_for(@reloj) do |f| %>
+  <% if @reloj.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@reloj.errors.count, "error") %> prohibited this reloj from being saved:</h2>
+
+      <ul>
+      <% @reloj.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+	<div class="col-lg-6">
+		<div class="form-group">
+		  <%= f.label :marca %><br>
+		  <%= f.text_field :marca, class: "form-control" %>
+		</div>
+		<div class="form-group">
+		  <%= f.label :modelo %><br>
+		  <%= f.text_field :modelo, class: "form-control" %>
+		</div>
+		<div class="form-group">
+		  <%= f.label :descripción %><br>
+		  <%= f.text_field :descripcion, class: "form-control" %>
+		</div>
+		<div class="form-group">
+		  <%= f.label :precio %><br>
+		  <%= f.text_field :precio, class: "form-control" %>
+		</div>
+		<div class="form-group">
+      <label>Proveedor</label><br>
+      <%= f.collection_select(:proveedor_id, Proveedor.all.order('nombre asc'), :id, :nombre, {prompt: "Selecciona"}, {class: "form-control"}) %>
+    </div>
+		<div class="actions">
+		  <%= f.submit 'Enviar', class: "btn btn-default" %>
+		</div>
+  </div>
+<% end %>

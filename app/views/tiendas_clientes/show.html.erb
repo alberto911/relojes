@@ -1,0 +1,17 @@
+<p>
+  <strong>Nombre:</strong>
+  <%= @tienda_cliente.nombre %>
+</p>
+
+<p>
+  <strong>Direccion:</strong>
+  <%= @tienda_cliente.direccion %>
+</p>
+
+<p>
+  <strong>Telefono:</strong>
+  <%= @tienda_cliente.telefono %>
+</p>
+
+<%= link_to 'Edit', edit_tienda_cliente_path(@tienda_cliente) %> |
+<%= link_to 'Back', cliente_tiendas_clientes_path(@tienda_cliente.cliente) %>

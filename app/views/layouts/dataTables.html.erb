@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+	
+  <title>Relojes</title>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false %>
+  <%= javascript_include_tag    'application', media: 'all', 'data-turbolinks-track' => false %>
+  <%= csrf_meta_tags %>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.6/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+				$('#dataTable').DataTable()({
+			      responsive: true
+			  });
+		});
+	</script> 
+</head>
+
+<body>
+	<div id="wrapper">
+		<% if notice %>
+			<p class="alert alert-success"><span class="close" data-dismiss="alert">&times;</span><%= notice %></p>
+		<% end %>
+		<% if alert %>
+			<p class="alert alert-danger"><span class="close" data-dismiss="alert">&times;</span><%= alert %></p>
+		<% end %>
+	
+		<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+			<%= render "shared/nav" %>
+			<%= render "shared/sidebar" %>
+		</nav>
+
+		<div id="page-wrapper">
+			<%= yield %>
+		</div>
+	</div>
+</body>
+</html>

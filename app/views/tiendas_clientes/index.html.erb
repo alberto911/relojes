@@ -1,0 +1,31 @@
+<h2 class="page-header">Tiendas de <%= @cliente.nombre %></h2>
+
+<div class="dataTable_wrapper">
+	<table id="dataTable" class="table table-striped table-bordered table-hover" width="100%" cellspacing="0">
+		<thead>
+		  <tr>
+		    <th>Nombre</th>
+		    <th>Direccion</th>
+		    <th>Telefono</th>
+		    <th>Show</th>
+				<th>Edit</th>
+				<th>Destroy</th>
+		  </tr>
+		</thead>
+
+		<tbody>
+		  <% @tiendas_clientes.each do |tienda_cliente| %>
+		    <tr>
+		      <td><%= tienda_cliente.nombre %></td>
+		      <td><%= tienda_cliente.direccion %></td>
+		      <td><%= tienda_cliente.telefono %></td>
+		      <td><%= link_to 'Show', tienda_cliente %></td>
+		      <td><%= link_to 'Edit', edit_tienda_cliente_path(tienda_cliente) %></td>
+		      <td><%= link_to 'Destroy', tienda_cliente, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		    </tr>
+		  <% end %>
+		</tbody>
+	</table>
+</div>
+
+<%= link_to 'Nueva tienda', new_cliente_tienda_cliente_path(@cliente), role: "button", class: "btn btn-outline btn-primary" %><br>

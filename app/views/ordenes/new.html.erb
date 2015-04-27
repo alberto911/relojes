@@ -1,0 +1,22 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+<h2 class="page-header">Nueva orden</h2>
+
+<%= collection_select(nil, :cliente_id,  @clientes,  :id, :nombre, {:prompt   => "Select a Cliente"}, {:id => 'cliente_select'}) %>
+<br/>
+<%= collection_select(nil, :tienda_cliente_id, @tiendas_clientes, :id, :nombre, {:prompt   => "Select a Tienda"}, {:id => 'tienda_select'}) %>
+<br/>
+
+<script>
+  $(document).ready(function() {
+    $('#cliente_select').change(function() {
+      $.ajax({
+        url: "<%= update_tiendas_path %>",
+        data: {
+          cliente_id : $('#cliente_select').val()
+        },
+        dataType: "script"
+      });
+    });
+  });
+</script>

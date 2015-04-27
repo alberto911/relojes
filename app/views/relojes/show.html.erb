@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Marca:</strong>
+  <%= @reloj.marca %>
+</p>
+
+<p>
+  <strong>Modelo:</strong>
+  <%= @reloj.modelo %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @reloj.descripcion %>
+</p>
+
+<p>
+  <strong>Precio:</strong>
+  <%= @reloj.precio %>
+</p>
+
+<%= link_to 'Edit', edit_reloj_path(@reloj) %> |
+<%= link_to 'Back', relojes_path %>

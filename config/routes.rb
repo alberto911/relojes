@@ -1,14 +1,31 @@
 Rails.application.routes.draw do
+  resources :ordenes
+
+  resources :repartidores
+
+  resources :clientes do
+		resources :tiendas_clientes, shallow: true
+  end
+
+  resources :relojes
+
+  resources :vendedores
+
   resources :proveedores
 
-  devise_for :users
-  resources :users
+  devise_for :users, :skip => [:registrations]                                          
+	as :user do
+		get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'    
+		patch 'users/:id' => 'devise/registrations#update', :as => 'user_registration'            
+	end
+
+	get 'ordenes/update_tiendas', as: 'update_tiendas'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'users#index'
+  root 'proveedores#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

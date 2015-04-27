@@ -5,6 +5,7 @@ class ProveedoresController < ApplicationController
   # GET /proveedores.json
   def index
     @proveedores = Proveedor.all
+		render layout: "dataTables"
   end
 
   # GET /proveedores/1

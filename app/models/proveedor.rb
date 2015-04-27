@@ -1,4 +1,6 @@
 class Proveedor < ActiveRecord::Base
+	has_many :relojes, inverse_of: :proveedor, dependent: :destroy	
+	
 	validates :nombre, :telefono, :direccion, :rfc, presence: true
   validates :nombre, :telefono, :rfc, uniqueness: true  
 	validates :nombre, :direccion, length: { maximum: 50 }

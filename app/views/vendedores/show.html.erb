@@ -1,0 +1,17 @@
+<p>
+  <strong>Nombre:</strong>
+  <%= @vendedor.nombre %>
+</p>
+
+<p>
+  <strong>Telefono:</strong>
+  <%= @vendedor.telefono %>
+</p>
+
+<p>
+  <strong>Rfc:</strong>
+  <%= @vendedor.rfc %>
+</p>
+
+<%= link_to 'Edit', edit_vendedor_path(@vendedor) %> |
+<%= link_to 'Back', vendedores_path %>

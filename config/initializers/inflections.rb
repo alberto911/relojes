@@ -17,4 +17,9 @@
 
 ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'proveedor', 'proveedores'
+  inflect.irregular 'vendedor', 'vendedores'
+  inflect.irregular 'reloj', 'relojes'
+  inflect.irregular 'repartidor', 'repartidores'
+  inflect.irregular 'orden', 'ordenes'
+  inflect.irregular 'tienda_cliente', 'tiendas_clientes'
 end

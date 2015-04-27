@@ -1,31 +1,30 @@
-<h1>Listing Proveedores</h1>
+<h2 class="page-header">Proveedores</h2>
+<div class="dataTable_wrapper">
+	<table id="dataTable" class="table table-striped table-bordered table-hover" width="100%" cellspacing="0">
+		<thead>
+		  <tr>
+		    <th>Nombre</th>
+		    <th>Telefono</th>
+		    <th>Direccion</th>
+		    <th>Rfc</th>
+		    <th>Show</th>
+				<th>Edit</th>
+				<th>Destroy</th>
+		  </tr>
+		</thead>
 
-<table>
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Telefono</th>
-      <th>Direccion</th>
-      <th>Rfc</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @proveedores.each do |proveedor| %>
-      <tr>
-        <td><%= proveedor.nombre %></td>
-        <td><%= proveedor.telefono %></td>
-        <td><%= proveedor.direccion %></td>
-        <td><%= proveedor.rfc %></td>
-        <td><%= link_to 'Show', proveedor %></td>
-        <td><%= link_to 'Edit', edit_proveedor_path(proveedor) %></td>
-        <td><%= link_to 'Destroy', proveedor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Proveedor', new_proveedor_path %>
+		<tbody>
+		  <% @proveedores.each do |proveedor| %>
+		    <tr>
+		      <td><%= proveedor.nombre %></td>
+		      <td><%= proveedor.telefono %></td>
+		      <td><%= proveedor.direccion %></td>
+		      <td><%= proveedor.rfc %></td>
+		      <td><%= link_to 'Show', proveedor %></td>
+		      <td><%= link_to 'Edit', edit_proveedor_path(proveedor) %></td>
+		      <td><%= link_to 'Destroy', proveedor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		    </tr>
+		  <% end %>
+		</tbody>
+	</table>
+</div>

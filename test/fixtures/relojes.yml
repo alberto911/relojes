@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  marca: 
+  modelo: 
+  descripcion: 
+  precio: 9.99
+
+two:
+  marca: 
+  modelo: 
+  descripcion: 
+  precio: 9.99

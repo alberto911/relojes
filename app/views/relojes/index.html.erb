@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Relojes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Marca</th>
+      <th>Modelo</th>
+      <th>Descripcion</th>
+      <th>Precio</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @relojes.each do |reloj| %>
+      <tr>
+        <td><%= reloj.marca %></td>
+        <td><%= reloj.modelo %></td>
+        <td><%= reloj.descripcion %></td>
+        <td><%= reloj.precio %></td>
+        <td><%= link_to 'Show', reloj %></td>
+        <td><%= link_to 'Edit', edit_reloj_path(reloj) %></td>
+        <td><%= link_to 'Destroy', reloj, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Reloj', new_reloj_path %>

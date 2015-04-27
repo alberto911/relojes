@@ -1,0 +1,39 @@
+<%= form_for(@cliente) do |f| %>
+  <% if @cliente.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@cliente.errors.count, "error") %> prohibited this cliente from being saved:</h2>
+
+      <ul>
+      <% @cliente.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="col-lg-6">
+		<div class="form-group">
+		  <%= f.label :nombre %><br>
+		  <%= f.text_field :nombre, class: "form-control" %>
+		</div>
+		<div class="form-group">
+		  <label>RFC</label><br>
+		  <%= f.text_field :rfc, class: "form-control" %>
+		</div>
+		<div class="form-group">
+		  <%= f.label :teléfono %><br>
+		  <%= f.text_field :telefono, class: "form-control" %>
+		</div>
+		<div class="form-group">
+		  <%= f.label :dirección_fiscal %><br>
+		  <%= f.text_field :direccion_fiscal, class: "form-control" %>
+		</div>
+		<div class="form-group">
+      <label>Vendedor</label><br>
+      <%= f.collection_select(:vendedor_id, Vendedor.all.order('nombre asc'), :id, :nombre, {prompt: "Selecciona"}, {class: "form-control"}) %>
+    </div>
+		<div class="actions">
+		  <%= f.submit 'Enviar', class: "btn btn-default" %>
+		</div>
+	</div>
+<% end %>

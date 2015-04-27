@@ -1,0 +1,28 @@
+<%= form_for(@orden) do |f| %>
+  <% if @orden.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@orden.errors.count, "error") %> prohibited this orden from being saved:</h2>
+
+      <ul>
+      <% @orden.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+	<div class="col-lg-6">
+		<div class="form-group">
+      <label>Cliente</label><br>
+      <%= collection_select(nil, :cliente_id, @clientes, :id, :nombre, {prompt: "Selecciona"}, {class: "form-control", id: "cliente_select"}) %>
+    </div>
+		<div class="form-group">
+      <label>Tienda</label><br>
+      <%= f.collection_select(:tienda_cliente_id, @tiendas_clientes, :id, :nombre, {prompt: "Selecciona"}, {class: "form-control", id: "tienda_select"}) %>
+    </div>
+		<div class="actions">
+		  <%= f.submit 'Enviar', class: "btn btn-default" %>
+		</div>
+	</div>
+	<p>Holui</p>
+<% end %>

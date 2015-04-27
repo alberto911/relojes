@@ -1,0 +1,22 @@
+<p>
+  <strong>Nombre:</strong>
+  <%= @repartidor.nombre %>
+</p>
+
+<p>
+  <strong>Rfc:</strong>
+  <%= @repartidor.rfc %>
+</p>
+
+<p>
+  <strong>Telefono:</strong>
+  <%= @repartidor.telefono %>
+</p>
+
+<p>
+  <strong>Direccion:</strong>
+  <%= @repartidor.direccion %>
+</p>
+
+<%= link_to 'Edit', edit_repartidor_path(@repartidor) %> |
+<%= link_to 'Back', repartidores_path %>

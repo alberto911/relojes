@@ -30,18 +30,45 @@
                 <!-- /.nav-second-level -->
             </li>
             <li>
-                <a href="tables.html"><span class="glyphicon glyphicon-list-alt"></span> Tables</a>
+								<a data-toggle="collapse" data-target="#tablas" aria-expanded="false" aria-controls="coll">
+                <span class="glyphicon glyphicon-list-alt"></span> Tablas<span class="fa arrow"></span></a>
+								<ul class="nav nav-second-level collapse" id="tablas">
+										<li>
+                        <%= link_to 'Clientes', clientes_path %></td>
+                    </li>              
+										<li>
+                        <%= link_to 'Proveedores', proveedores_path %></td>
+                    </li>
+                    <li>
+                        <%= link_to 'Relojes', relojes_path %></td>
+                    </li>
+										<li>
+                        <%= link_to 'Vendedores', vendedores_path %></td>
+                    </li>
+										<li>
+                        <%= link_to 'Repartidores', repartidores_path %></td>
+                    </li>
+                </ul>
             </li>
             <li>
-								<a data-toggle="collapse" data-target="#tables" aria-expanded="false" aria-controls="coll">
+								<a data-toggle="collapse" data-target="#crear" aria-expanded="false" aria-controls="coll">
 								<span class="glyphicon glyphicon-edit"></span> Crear nuevo<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse" id="tables">
+                <ul class="nav nav-second-level collapse" id="crear">
                     <li>
+                        <%= link_to 'Cliente', new_cliente_path %></td>
+                    </li>                  
+										<li>
                         <%= link_to 'Proveedor', new_proveedor_path %></td>
                     </li>
                     <li>
-                        <a href="morris.html">Reloj</a>
+                        <%= link_to 'Reloj', new_reloj_path %></td>
                     </li>
+										<li>
+                        <%= link_to 'Vendedor', new_vendedor_path %></td>
+                    </li>
+										<li>
+                        <%= link_to 'Repartidor', new_repartidor_path %></td>
+                    </li> 
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
