@@ -6,4 +6,12 @@ class Reloj < ActiveRecord::Base
 	validates :marca, :modelo, length: { maximum: 25 }
   validates :descripcion, length: { maximum: 100 }
   validates :precio, format: { with: /\A\d{1,6}(?:\.\d{0,2})?\z/, message: "debe tener máximo 6 dígitos enteros y 2 decimales" }
+
+	def self.por_marca
+	  group(:marca).count
+	end
+
+	def self.precios
+	  select("modelo, precio" ).group("modelo, precio")	
+	end
 end

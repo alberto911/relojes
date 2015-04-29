@@ -1,17 +1,19 @@
-<p>
-  <strong>Nombre:</strong>
-  <%= @tienda_cliente.nombre %>
-</p>
+<div class="row">
+	<p></p>
+	<div class="col-lg-4">
+		<div class="well well-lg">
+		<h4><%= @tienda_cliente.nombre %></h4>
+			<p>
+			  <strong>Direccion:</strong>
+			  <%= @tienda_cliente.direccion %>
+			</p>
 
-<p>
-  <strong>Direccion:</strong>
-  <%= @tienda_cliente.direccion %>
-</p>
-
-<p>
-  <strong>Telefono:</strong>
-  <%= @tienda_cliente.telefono %>
-</p>
-
-<%= link_to 'Edit', edit_tienda_cliente_path(@tienda_cliente) %> |
-<%= link_to 'Back', cliente_tiendas_clientes_path(@tienda_cliente.cliente) %>
+			<p>
+			  <strong>Telefono:</strong>
+			  <%= @tienda_cliente.telefono %>
+			</p>
+		</div>
+	</div>
+</div>
+<%= link_to 'Editar', edit_tienda_cliente_path(@tienda_cliente), class: "btn btn-default" %>
+<%= link_to 'Regresar', cliente_tiendas_clientes_path(@tienda_cliente.cliente), class: "btn btn-default" %>

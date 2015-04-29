@@ -5,6 +5,7 @@ class RelojesController < ApplicationController
   # GET /relojes.json
   def index
     @relojes = Reloj.all
+		render layout: "dataTables"
   end
 
   # GET /relojes/1

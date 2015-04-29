@@ -1,17 +1,19 @@
-<p>
-  <strong>Nombre:</strong>
-  <%= @vendedor.nombre %>
-</p>
+<div class="row">
+	<p></p>
+	<div class="col-lg-4">
+		<div class="well well-lg">
+		<h4>  <%= @vendedor.nombre %></h4>
+			<p>
+			  <strong>Teléfono:</strong>
+			  <%= @vendedor.telefono %>
+			</p>
 
-<p>
-  <strong>Telefono:</strong>
-  <%= @vendedor.telefono %>
-</p>
-
-<p>
-  <strong>Rfc:</strong>
-  <%= @vendedor.rfc %>
-</p>
-
-<%= link_to 'Edit', edit_vendedor_path(@vendedor) %> |
-<%= link_to 'Back', vendedores_path %>
+			<p>
+			  <strong>RfC:</strong>
+			  <%= @vendedor.rfc %>
+			</p>
+		</div>
+	</div>
+</div>
+<%= link_to 'Editar', edit_vendedor_path(@vendedor), class: "btn btn-default" %>
+<%= link_to 'Regresar', vendedores_path, class: "btn btn-default" %>

@@ -1,6 +1,9 @@
-<h1>Editing Proveedor</h1>
-
+<h2 class="page-header">Editar proveedor</h2>
+<div class="row">
+<%= link_to 'Mostrar', @proveedor,  class: "btn btn-default" %> 
+<%= link_to 'Regresar', proveedores_path,  class: "btn btn-default" %>
+<p></p>
 <%= render 'form' %>
+</div>
 
-<%= link_to 'Show', @proveedor %> |
-<%= link_to 'Back', proveedores_path %>
+

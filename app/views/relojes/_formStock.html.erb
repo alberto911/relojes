@@ -1,0 +1,23 @@
+<%= form_for(@reloj) do |f| %>
+  <% if @reloj.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@reloj.errors.count, "error") %> prohibited this reloj from being saved:</h2>
+
+      <ul>
+      <% @reloj.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+	<div class="col-lg-6">
+		<div class="form-group">
+		  <%= f.label :stock %><br>
+		  <%= f.text_field :stock, class: "form-control" %>
+		</div>
+		<div class="actions">
+		  <%= f.submit 'Enviar', class: "btn btn-default" %>
+		</div>
+  </div>
+<% end %>

@@ -1,31 +1,29 @@
-<h1>Listing Repartidores</h1>
+<h2 class="page-header">Repartidores</h2>
+<div class="dataTable_wrapper">
+	<table id="dataTable" class="table table-striped table-bordered table-hover" width="100%" cellspacing="0">
+  		<thead>
+    		<tr>
+      			<th>Nombre</th>
+      			<th>RFC</th>
+      			<th>Teléfono</th>
+      			<th>Dirección</th>
+        		<th></th>		
+   			</tr>
+  		</thead>
 
-<table>
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Rfc</th>
-      <th>Telefono</th>
-      <th>Direccion</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @repartidores.each do |repartidor| %>
-      <tr>
-        <td><%= repartidor.nombre %></td>
-        <td><%= repartidor.rfc %></td>
-        <td><%= repartidor.telefono %></td>
-        <td><%= repartidor.direccion %></td>
-        <td><%= link_to 'Show', repartidor %></td>
-        <td><%= link_to 'Edit', edit_repartidor_path(repartidor) %></td>
-        <td><%= link_to 'Destroy', repartidor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Repartidor', new_repartidor_path %>
+  		<tbody>
+   			<% @repartidores.each do |repartidor| %>
+      			<tr>
+        			<td><%= repartidor.nombre %></td>
+        			<td><%= repartidor.rfc %></td>
+        			<td><%= repartidor.telefono %></td>
+        			<td><%= repartidor.direccion %></td>
+        			<td><%= link_to "<span class=\"glyphicon glyphicon-info-sign\"></span>".html_safe, repartidor %>
+        			<%= link_to "<span class=\"glyphicon glyphicon-pencil\"></span>".html_safe, edit_repartidor_path(repartidor) %>
+        			<%= link_to "<span class=\"glyphicon glyphicon-remove\"></span>".html_safe, repartidor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      			</tr>
+    		<% end %>
+  		</tbody>
+	</table>
+</div>
+<%= link_to 'Nuevo Repartidor', new_repartidor_path, class: "btn btn-default" %>
