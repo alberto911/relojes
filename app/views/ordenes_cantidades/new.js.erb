@@ -1,0 +1,14 @@
+$('#cantidad-form').html("<%= j (render 'form') %>");
+$('#cantidad-form').slideDown(350);
+
+$('#proveedor_select').change(function() {
+  $.ajax({
+    url: "<%= update_relojes_path %>",
+		type: "POST",
+		beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+    data: {
+      proveedor_id : $('#proveedor_select').val()
+    },
+    dataType: "script"
+  });
+});

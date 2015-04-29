@@ -1,0 +1,32 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+<h3>Nuevo producto</h3>
+<%= form_for([@orden, @orden_cantidad], remote: true) do |f| %>
+  <% if @orden_cantidad.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@orden_cantidad.errors.count, "error") %> prohibited this producto from being saved:</h2>
+
+      <ul>
+      <% @orden_cantidad.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+	<div class="form-group">
+    <label>Proveedor</label><br>
+    <%= collection_select(nil, :proveedor_id, @proveedores, :id, :nombre, {prompt: "Selecciona"}, {class: "form-control", id: "proveedor_select"}) %>
+  </div>
+	<div class="form-group">
+    <label>Reloj</label><br>
+    <%= f.collection_select(:reloj_id, @relojes, :id, :modelo, {prompt: "Selecciona un reloj"}, {class: "form-control", id: "reloj_select"}) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :cantidad %><br>
+    <%= f.number_field :cantidad, class: "form-control" %>
+  </div>
+  <div class="actions">
+		<%= f.submit 'Enviar', class: "btn btn-default" %>
+	</div>
+<% end %>

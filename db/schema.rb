@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150426191400) do
+ActiveRecord::Schema.define(version: 20150427144423) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,16 @@ ActiveRecord::Schema.define(version: 20150426191400) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
   end
+
+  create_table "ordenes_cantidades", force: :cascade do |t|
+    t.integer  "cantidad",   null: false
+    t.integer  "orden_id",   null: false
+    t.integer  "reloj_id",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "ordenes_cantidades", ["orden_id", "reloj_id"], name: "index_ordenes_cantidades_on_orden_id_and_reloj_id", unique: true, using: :btree
 
   create_table "proveedores", force: :cascade do |t|
     t.string   "nombre",     null: false
@@ -104,6 +114,8 @@ ActiveRecord::Schema.define(version: 20150426191400) do
   add_foreign_key "clientes", "vendedores", name: "fk_clientes_vendedores"
   add_foreign_key "ordenes", "repartidores", name: "fk_ordenes_repartidores"
   add_foreign_key "ordenes", "tiendas_clientes", name: "fk_ordenes_tiendas"
+  add_foreign_key "ordenes_cantidades", "ordenes", name: "fk_ordenes_cantidades"
+  add_foreign_key "ordenes_cantidades", "relojes", name: "fk_cantidades_relojes"
   add_foreign_key "relojes", "proveedores", name: "fk_relojes_proveedores"
   add_foreign_key "repartidores", "users", name: "fk_repartidores_users"
   add_foreign_key "tiendas_clientes", "clientes", name: "fk_tiendas_clientes"

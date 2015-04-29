@@ -18,11 +18,10 @@
     </div>
 		<div class="form-group">
       <label>Tienda</label><br>
-      <%= f.collection_select(:tienda_cliente_id, @tiendas_clientes, :id, :nombre, {prompt: "Selecciona"}, {class: "form-control", id: "tienda_select"}) %>
+      <%= f.collection_select(:tienda_cliente_id, @tiendas_clientes, :id, :nombre, {prompt: "Selecciona una tienda"}, {class: "form-control", id: "tienda_select"}) %>
     </div>
 		<div class="actions">
 		  <%= f.submit 'Enviar', class: "btn btn-default" %>
 		</div>
 	</div>
-	<p>Holui</p>
 <% end %>

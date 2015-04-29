@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :ordenes
+  resources :ordenes do
+		resources :ordenes_cantidades, only: [:new, :create, :edit, :update, :destroy]
+	end
 
   resources :repartidores
 
@@ -19,7 +21,8 @@ Rails.application.routes.draw do
 		patch 'users/:id' => 'devise/registrations#update', :as => 'user_registration'            
 	end
 
-	get 'ordenes/update_tiendas', as: 'update_tiendas'
+	post 'ordenes/update_tiendas', as: 'update_tiendas'
+	post 'ordenes_cantidades/update_relojes', as: 'update_relojes'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

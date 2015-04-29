@@ -5,11 +5,14 @@ class OrdenesController < ApplicationController
   # GET /ordenes.json
   def index
     @ordenes = Orden.all
+		render layout: "dataTables"
   end
 
   # GET /ordenes/1
   # GET /ordenes/1.json
   def show
+		@ordenes_cantidades = @orden.ordenes_cantidades
+		render layout: "dataTables"
   end
 
   # GET /ordenes/new
@@ -21,6 +24,8 @@ class OrdenesController < ApplicationController
 
   # GET /ordenes/1/edit
   def edit
+		@clientes = Cliente.joins(:tiendas_clientes).distinct.order('nombre asc')
+		@tiendas_clientes = TiendaCliente.all
   end
 
   # POST /ordenes
@@ -76,6 +81,6 @@ class OrdenesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def orden_params
-      params.require(:orden).permit(:fecha_pedido, :fecha_entrega)
+      params.require(:orden).permit(:fecha_entrega, :tienda_cliente_id)
     end
 end

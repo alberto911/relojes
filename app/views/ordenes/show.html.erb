@@ -1,14 +1,41 @@
-<p id="notice"><%= notice %></p>
+<div class="row">	
+	<div class="col-lg-4">
+		<h2 class="page-header">Orden</h2>
+		<p>
+			<strong>Cliente:</strong>
+			<%= @orden.tienda_cliente.cliente.nombre %>
+		</p>
 
-<p>
-  <strong>Fecha pedido:</strong>
-  <%= @orden.fecha_pedido %>
-</p>
+		<p>
+			<strong>Tienda:</strong>
+			<%= @orden.tienda_cliente.nombre %>
+		</p>
 
-<p>
-  <strong>Fecha entrega:</strong>
-  <%= @orden.fecha_entrega %>
-</p>
+		<p>
+			<strong>Fecha pedido:</strong>
+			<%= @orden.created_at %>
+		</p>
 
-<%= link_to 'Edit', edit_orden_path(@orden) %> |
-<%= link_to 'Back', ordenes_path %>
+		<p>
+			<strong>Fecha entrega:</strong>
+			<%= @orden.fecha_entrega %>
+		</p>
+
+		<%= link_to new_orden_orden_cantidad_path(@orden), remote: true do %>
+			<button class="btn btn-default">Agregar producto</button>
+		<% end %><p></p>
+
+		<%= link_to 'Edit', edit_orden_path(@orden) %> |
+		<%= link_to 'Back', ordenes_path %>
+	</div>
+
+	<div class="col-lg-8">
+		<%= render "ordenes_cantidades/index" %>
+	</div>
+</div>
+
+<div class="row">
+  <div class="col-lg-6">
+		<div id="cantidad-form" style="display:none;"></div>
+	</div>
+</div>

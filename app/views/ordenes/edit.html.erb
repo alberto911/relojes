@@ -1,6 +1,24 @@
-<h1>Editing Orden</h1>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+<h2 class="page-header">Editing Orden</h1>
 
 <%= render 'form' %>
 
 <%= link_to 'Show', @orden %> |
 <%= link_to 'Back', ordenes_path %>
+
+<script>
+  $(document).ready(function() {
+    $('#cliente_select').change(function() {
+      $.ajax({
+        url: "<%= update_tiendas_path %>",
+				type: "POST",
+				beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        data: {
+          cliente_id : $('#cliente_select').val()
+        },
+        dataType: "script"
+      });
+    });
+  });
+</script>

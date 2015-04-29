@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Cantidad:</strong>
+  <%= @orden_cantidad.cantidad %>
+</p>
+
+<%= link_to 'Edit', edit_orden_cantidad_path(@orden_cantidad) %> |
+<%= link_to 'Back', ordenes_cantidades_path %>

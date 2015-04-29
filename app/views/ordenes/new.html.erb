@@ -2,16 +2,15 @@
 
 <h2 class="page-header">Nueva orden</h2>
 
-<%= collection_select(nil, :cliente_id,  @clientes,  :id, :nombre, {:prompt   => "Select a Cliente"}, {:id => 'cliente_select'}) %>
-<br/>
-<%= collection_select(nil, :tienda_cliente_id, @tiendas_clientes, :id, :nombre, {:prompt   => "Select a Tienda"}, {:id => 'tienda_select'}) %>
-<br/>
+<%= render 'form' %>
 
 <script>
   $(document).ready(function() {
     $('#cliente_select').change(function() {
       $.ajax({
         url: "<%= update_tiendas_path %>",
+				type: "POST",
+				beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
         data: {
           cliente_id : $('#cliente_select').val()
         },

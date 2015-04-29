@@ -22,4 +22,5 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'repartidor', 'repartidores'
   inflect.irregular 'orden', 'ordenes'
   inflect.irregular 'tienda_cliente', 'tiendas_clientes'
+	inflect.irregular 'orden_cantidad', 'ordenes_cantidades'
 end

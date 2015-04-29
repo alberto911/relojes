@@ -1,6 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Ordenes</h1>
+<h2 class="page-header">Órdenes</h2>
 
 <table>
   <thead>
@@ -14,7 +12,7 @@
   <tbody>
     <% @ordenes.each do |orden| %>
       <tr>
-        <td><%= orden.fecha_pedido %></td>
+        <td><%= orden.created_at %></td>
         <td><%= orden.fecha_entrega %></td>
         <td><%= link_to 'Show', orden %></td>
         <td><%= link_to 'Edit', edit_orden_path(orden) %></td>

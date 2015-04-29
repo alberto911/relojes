@@ -1,5 +1,7 @@
 class Reloj < ActiveRecord::Base
-	belongs_to :proveedor, inverse_of: :relojes	
+	belongs_to :proveedor, inverse_of: :relojes
+	has_many :ordenes_cantidades
+	has_many :ordenes, through: :ordenes_cantidades	
 	
 	validates :marca, :modelo, :descripcion, :precio, :proveedor_id, presence: true
 	validates :modelo, uniqueness: true
