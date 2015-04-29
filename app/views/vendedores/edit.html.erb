@@ -1,6 +1,8 @@
-<h1>Editing Vendedor</h1>
-
+<h2 class="page-header">Editar vendedor</h2>
+<div class="row">
+<%= link_to 'Mostrar', @vendedor,  class: "btn btn-default" %> 
+<%= link_to 'Regresar', vendedores_path,  class: "btn btn-default" %>
+<p></p>
 <%= render 'form' %>
+</div>
 
-<%= link_to 'Show', @vendedor %> |
-<%= link_to 'Back', vendedores_path %>

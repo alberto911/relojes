@@ -1,6 +1,8 @@
-<h2 class="page-header">Editing Repartidor</h2>
-
+<h2 class="page-header">Editar repartidor</h2>
+<div class="row">
+<%= link_to 'Mostrar', @repartidor, class: "btn btn-default"  %>
+<%= link_to 'Regresar', repartidores_path,  class: "btn btn-default"  %>
+<p></p>
 <%= render 'form' %>
+</div>
 
-<%= link_to 'Show', @repartidor %> |
-<%= link_to 'Back', repartidores_path %>

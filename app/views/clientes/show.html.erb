@@ -1,23 +1,27 @@
-<p>
-  <strong>Nombre:</strong>
-  <%= @cliente.nombre %>
-</p>
+<div class="row">
+	<p></p>
+	<div class="col-lg-4">
+		<div class="well well-lg">
+		<h4>  <%= @cliente.nombre %></h4>
+			<p>
+			  <strong>Teléfono:</strong>
+			  <%= @cliente.telefono %>
+			</p>
 
-<p>
-  <strong>Telefono:</strong>
-  <%= @cliente.telefono %>
-</p>
+			<p>
+			  <strong>Dirección fiscal:</strong>
+			  <%= @cliente.direccion_fiscal %>
+			</p>
 
-<p>
-  <strong>Direccion fiscal:</strong>
-  <%= @cliente.direccion_fiscal %>
-</p>
+			<p>
+			  <strong>RFC:</strong>
+			  <%= @cliente.rfc %>
+			</p>
 
-<p>
-  <strong>Rfc:</strong>
-  <%= @cliente.rfc %>
-</p>
-
-<%= link_to 'Ver tiendas', cliente_tiendas_clientes_path(@cliente), role: "button", class: "btn btn-outline btn-primary" %><br>
-<%= link_to 'Edit', edit_cliente_path(@cliente) %> |
-<%= link_to 'Back', clientes_path %>
+			<%= link_to 'Ver tiendas', cliente_tiendas_clientes_path(@cliente), role: "button", class: "btn btn-outline btn-primary" %>
+			
+		</div>
+	</div>
+</div>
+<%= link_to 'Editar', edit_cliente_path(@cliente), class: "btn btn-default" %>
+<%= link_to 'Regresar', clientes_path, class: "btn btn-default" %>

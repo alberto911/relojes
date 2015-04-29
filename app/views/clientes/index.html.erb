@@ -5,12 +5,11 @@
 		<thead>
 		  <tr>
 		    <th>Nombre</th>
-		    <th>Telefono</th>
-		    <th>Direccion fiscal</th>
-		    <th>Rfc</th>
-		    <th>Show</th>
-				<th>Edit</th>
-				<th>Destroy</th>
+		    <th>Teléfono</th>
+		    <th>Dirección fiscal</th>
+		    <th>RFC</th>
+		    <th></th>
+				
 		  </tr>
 		</thead>
 
@@ -21,11 +20,12 @@
 		      <td><%= cliente.telefono %></td>
 		      <td><%= cliente.direccion_fiscal %></td>
 		      <td><%= cliente.rfc %></td>
-		      <td><%= link_to 'Show', cliente %></td>
-		      <td><%= link_to 'Edit', edit_cliente_path(cliente) %></td>
-		      <td><%= link_to 'Destroy', cliente, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		      <td><%= link_to "<span class=\"glyphicon glyphicon-info-sign\"></span>".html_safe, cliente %>
+		      <%= link_to "<span class=\"glyphicon glyphicon-pencil\"></span>".html_safe, edit_cliente_path(cliente) %>
+		      <%= link_to "<span class=\"glyphicon glyphicon-remove\"></span>".html_safe, cliente, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 		    </tr>
 		  <% end %>
 		</tbody>
 	</table>
 </div>
+<%= link_to 'Nuevo Cliente', new_cliente_path, class: "btn btn-default" %>

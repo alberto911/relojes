@@ -1,24 +1,30 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+	<p></p>
+	<div class="col-lg-4">
+		<div class="well well-lg">
+		<h4><%= @reloj.modelo %></h4>
+			<p>
+			  <strong>Marca:</strong>
+			  <%= @reloj.marca %>
+			</p>
 
-<p>
-  <strong>Marca:</strong>
-  <%= @reloj.marca %>
-</p>
+			<p>
+			  <strong>Descripción:</strong>
+			  <%= @reloj.descripcion %>
+			</p>
 
-<p>
-  <strong>Modelo:</strong>
-  <%= @reloj.modelo %>
-</p>
+			<p>
+			  <strong>Precio:</strong>
+			  <%= @reloj.precio %>
+			</p>
 
-<p>
-  <strong>Descripcion:</strong>
-  <%= @reloj.descripcion %>
-</p>
+			<p>
+			  <strong>Stock:</strong>
+			  <%= @reloj.stock %>
+			</p>
 
-<p>
-  <strong>Precio:</strong>
-  <%= @reloj.precio %>
-</p>
-
-<%= link_to 'Edit', edit_reloj_path(@reloj) %> |
-<%= link_to 'Back', relojes_path %>
+		</div>
+	</div>
+</div>
+<%= link_to 'Editar', edit_reloj_path(@reloj), class: "btn btn-default" %>
+<%= link_to 'Regresar', relojes_path, class: "btn btn-default" %>

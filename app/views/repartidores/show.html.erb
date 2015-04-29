@@ -1,22 +1,24 @@
-<p>
-  <strong>Nombre:</strong>
-  <%= @repartidor.nombre %>
-</p>
+<div class="row">
+	<p></p>
+	<div class="col-lg-4">
+		<div class="well well-lg">
+		<h4>  <%= @repartidor.nombre %></h4>
+			<p>
+			  <strong>RFC:</strong>
+			  <%= @repartidor.rfc %>
+			</p>
 
-<p>
-  <strong>Rfc:</strong>
-  <%= @repartidor.rfc %>
-</p>
+			<p>
+			  <strong>Teléfono:</strong>
+			  <%= @repartidor.telefono %>
+			</p>
 
-<p>
-  <strong>Telefono:</strong>
-  <%= @repartidor.telefono %>
-</p>
-
-<p>
-  <strong>Direccion:</strong>
-  <%= @repartidor.direccion %>
-</p>
-
-<%= link_to 'Edit', edit_repartidor_path(@repartidor) %> |
-<%= link_to 'Back', repartidores_path %>
+			<p>
+			  <strong>Dirección:</strong>
+			  <%= @repartidor.direccion %>
+			</p>
+		</div>
+	</div>
+</div>
+<%= link_to 'Editar', edit_repartidor_path(@repartidor), class: "btn btn-default" %> 
+<%= link_to 'Regresar', repartidores_path, class: "btn btn-default" %>

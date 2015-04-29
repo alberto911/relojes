@@ -1,5 +1,7 @@
-<h2 class="page-header">Editing tienda</h2>
-
+<h2 class="page-header">Editar tienda</h2>
+<div class="row">
+<%= link_to 'Mostrar', @tienda_cliente,  class: "btn btn-default" %> 
+<%= link_to 'Regresar', cliente_tiendas_clientes_path(@tienda_cliente.cliente), class: "btn btn-default" %>
+<p></p>
 <%= render 'form' %>
-
-<%= link_to 'Back', cliente_tiendas_clientes_path(@tienda_cliente.cliente) %>
+</div>
