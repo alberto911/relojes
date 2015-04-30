@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
+  resources :pedidos, except: [:edit, :update] do
+		resources :pedidos_cantidades, except: [:index, :show]
+	end
+
+	get 'pedidos/recibir/:id', to: 'pedidos#recibir', as: 'recibir_pedido'
+
   resources :ordenes do
-		resources :ordenes_cantidades, only: [:new, :create, :edit, :update, :destroy]
+		resources :ordenes_cantidades, except: [:index, :show]
 	end
 
   resources :repartidores

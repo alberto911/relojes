@@ -1,0 +1,23 @@
+<%= form_for(@pedido) do |f| %>
+  <% if @pedido.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pedido.errors.count, "error") %> prohibited this pedido from being saved:</h2>
+
+      <ul>
+      <% @pedido.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+	<div class="col-lg-6">
+		<div class="form-group">
+      <label>Proveedor</label><br>
+      <%= f.collection_select(:proveedor_id, @proveedores, :id, :nombre, {prompt: "Selecciona"}, {class: "form-control"}) %>
+    </div>
+		<div class="actions">
+		  <%= f.submit 'Enviar', class: "btn btn-default" %>
+		</div>
+	</div>
+<% end %>

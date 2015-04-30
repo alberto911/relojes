@@ -1,0 +1,26 @@
+<h3>Nuevo producto</h3>
+<%= form_for([@pedido, @pedido_cantidad], remote: true) do |f| %>
+  <% if @pedido_cantidad.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pedido_cantidad.errors.count, "error") %> prohibited this producto from being saved:</h2>
+
+      <ul>
+      <% @pedido_cantidad.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+	<div class="form-group">
+    <label>Reloj</label><br>
+    <%= f.collection_select(:reloj_id, @relojes, :id, :modelo, {prompt: "Selecciona un reloj"}, {class: "form-control"}) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :cantidad %><br>
+    <%= f.number_field :cantidad, class: "form-control" %>
+  </div>
+  <div class="actions">
+		<%= f.submit 'Enviar', class: "btn btn-default" %>
+	</div>
+<% end %>

@@ -1,0 +1,6 @@
+<tr>
+	<td><%= pedido_cantidad.reloj.modelo %></td>
+	<td><%= pedido_cantidad.cantidad %></td>
+	<td><%= link_to 'Edit', edit_pedido_pedido_cantidad_path(@pedido, pedido_cantidad), remote: true %></td>
+	<td><%= link_to 'Destroy', [@pedido, pedido_cantidad], remote: true, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>

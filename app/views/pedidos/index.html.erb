@@ -1,0 +1,36 @@
+<h2 class="page-header">Pedidos</h2>
+<div class="dataTable_wrapper">
+	<table id="dataTable" class="table table-striped table-bordered table-hover" width="100%" cellspacing="0">
+		<thead>
+		  <tr>
+				<th>Proveedor</th>
+		    <th>Fecha pedido</th>
+		    <th>Fecha recibido</th>
+		    <th></th>
+		  </tr>
+		</thead>
+
+		<tbody>
+		  <% @pedidos.each do |pedido| %>
+		    <tr>
+					<td><%= pedido.proveedor.nombre %></td>
+		      <td><%= pedido.created_at %></td>
+		      <td>
+						<% if pedido.recibido? %>	
+							<%= pedido.fecha_entrega %>
+						<% else %>
+							<%= link_to 'Recibir', recibir_pedido_path(pedido), class: "btn btn-default" %>
+						<% end %>
+					</td>
+					<td>
+						<%= link_to "<span class=\"glyphicon glyphicon-info-sign\"></span>".html_safe, pedido %>
+						<%= link_to "<span class=\"glyphicon glyphicon-remove\"></span>".html_safe, pedido, method: :delete, data: { confirm: 'Are you sure?' } %>
+					</td>
+		    </tr>
+		  <% end %>
+		</tbody>
+	</table>
+</div>
+<br>
+
+<%= link_to 'Nuevo Pedido', new_pedido_path, class: "btn btn-default" %>
