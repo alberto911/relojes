@@ -21,7 +21,8 @@
       <%= f.collection_select(:tienda_cliente_id, @tiendas_clientes, :id, :nombre, {prompt: "Selecciona una tienda"}, {class: "form-control", id: "tienda_select"}) %>
     </div>
 		<div class="actions">
-		  <%= f.submit 'Enviar', class: "btn btn-default" %>
+	      <%= link_to 'Cancelar', ordenes_path,  class: "btn btn-default" %>		
+		  <%= f.submit 'Enviar', class: "btn btn-default" %>  	
 		</div>
 	</div>
 <% end %>

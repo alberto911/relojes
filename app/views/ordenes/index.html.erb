@@ -1,27 +1,33 @@
 <h2 class="page-header">Órdenes</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>Fecha pedido</th>
-      <th>Fecha entrega</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="dataTable_wrapper">
+	<table id="dataTable" class="table table-striped table-bordered table-hover" width="100%" cellspacing="0">
+  		<thead>
+			<tr>
+			  <th>Cliente</th>
+			  <th>Tienda</th>
+			  <th>Fecha pedido</th>
+			  <th>Fecha entrega</th>
+			  <th>Total</th>		
+			  <th></th>
+			</tr>
+  		</thead>
 
-  <tbody>
-    <% @ordenes.each do |orden| %>
-      <tr>
-        <td><%= orden.created_at %></td>
-        <td><%= orden.fecha_entrega %></td>
-        <td><%= link_to 'Show', orden %></td>
-        <td><%= link_to 'Edit', edit_orden_path(orden) %></td>
-        <td><%= link_to 'Destroy', orden, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  		<tbody>
+    		<% @ordenes.each do |orden| %>
+      			<tr>
+					<td><%= orden.tienda_cliente.cliente.nombre %></td>
+					<td><%= orden.tienda_cliente.nombre %></td>
+					<td><%= orden.created_at %></td>
+					<td><%= orden.fecha_entrega %></td>
+					<td><%= orden.total %></td>
+					<td><%= link_to "<span class=\"glyphicon glyphicon-info-sign\"></span>".html_safe, orden %>
+					<%= link_to "<span class=\"glyphicon glyphicon-pencil\"></span>".html_safe, edit_orden_path(orden) %>
+					<%= link_to "<span class=\"glyphicon glyphicon-remove\"></span>".html_safe, orden, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
 
-<br>
-
-<%= link_to 'New Orden', new_orden_path %>
+<%= link_to 'Nueva orden', new_orden_path, class: "btn btn-default" %>

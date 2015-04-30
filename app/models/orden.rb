@@ -5,4 +5,12 @@ class Orden < ActiveRecord::Base
 	has_many :relojes, through: :ordenes_cantidades
 
 	validates :tienda_cliente_id, presence: true
+
+	def total
+	  	total = 0
+		ordenes_cantidades.each do |oc|
+			total += oc.subtotal
+		end
+		total
+	end
 end

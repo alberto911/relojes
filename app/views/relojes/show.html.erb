@@ -4,7 +4,12 @@
 		<div class="well well-lg">
 		<h4><%= @reloj.modelo %></h4>
 			<p>
-			  <strong>Marca:</strong>
+			  <strong>Proveedor:</strong>
+			  <%= @reloj.proveedor.nombre %>
+			</p>
+
+			<p>
+			  <strong> Línea:</strong>
 			  <%= @reloj.marca %>
 			</p>
 

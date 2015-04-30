@@ -1,12 +1,12 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<h2 class="page-header">Editar orden</h1>
 
-<h2 class="page-header">Editing Orden</h1>
-
+<div class="col-md-offset-4">
+<%= link_to 'Mostrar', @orden, class: "btn btn-default" %> 
+<%= link_to 'Regresar', ordenes_path, class: "btn btn-default" %>
+</div>
+<p></p>
 <%= render 'form' %>
-
-<%= link_to 'Show', @orden %> |
-<%= link_to 'Back', ordenes_path %>
-
 <script>
   $(document).ready(function() {
     $('#cliente_select').change(function() {

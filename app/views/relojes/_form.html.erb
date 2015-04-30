@@ -13,7 +13,7 @@
 
 	<div class="col-lg-6">
 		<div class="form-group">
-		  <%= f.label :marca %><br>
+		  <%= f.label :"línea" %><br>
 		  <%= f.text_field :marca, class: "form-control" %>
 		</div>
 		<div class="form-group">
@@ -33,6 +33,7 @@
       <%= f.collection_select(:proveedor_id, Proveedor.all.order('nombre asc'), :id, :nombre, {prompt: "Selecciona"}, {class: "form-control"}) %>
     </div>
 		<div class="actions">
+		  <%= link_to 'Cancelar', relojes_path,  class: "btn btn-default" %>
 		  <%= f.submit 'Enviar', class: "btn btn-default" %>
 		</div>
   </div>
