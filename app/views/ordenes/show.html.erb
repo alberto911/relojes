@@ -1,36 +1,41 @@
-<div class="row">	
+<div class="row">
+	<p></p>
 	<div class="col-lg-4">
-		<h2 class="page-header">Orden</h2>
-		<p>
-			<strong>Cliente:</strong>
-			<%= @orden.tienda_cliente.cliente.nombre %>
-		</p>
+		<div class="well well-lg">
+		<h4><%= @orden.tienda_cliente.cliente.nombre %></h4>
+		
+			<p>
+				<strong>Tienda:</strong>
+				<%= @orden.tienda_cliente.nombre %>
+			</p>
 
-		<p>
-			<strong>Tienda:</strong>
-			<%= @orden.tienda_cliente.nombre %>
-		</p>
+			<p>
+				<strong>Fecha pedido:</strong>
+				<%= @orden.created_at %>
+			</p>
 
-		<p>
-			<strong>Fecha pedido:</strong>
-			<%= @orden.created_at %>
-		</p>
+			<p>
+				<strong>Fecha entrega:</strong>
+				<%= @orden.fecha_entrega %>
+			</p>
 
-		<p>
-			<strong>Fecha entrega:</strong>
-			<%= @orden.fecha_entrega %>
-		</p>
+			<p>
+				<strong>Total:</strong>
+				<div id="total"><%= @orden.total %></div>
+			</p>
+		</div>
 
-		<%= link_to new_orden_orden_cantidad_path(@orden), remote: true do %>
-			<button class="btn btn-default">Agregar producto</button>
-		<% end %><p></p>
-
-		<%= link_to 'Edit', edit_orden_path(@orden) %> |
-		<%= link_to 'Back', ordenes_path %>
+		<%= link_to 'Editar', edit_orden_path(@orden),  class: "btn btn-default" %> 
+		<%= link_to 'Regresar', ordenes_path,  class: "btn btn-default" %>
 	</div>
 
 	<div class="col-lg-8">
 		<%= render "ordenes_cantidades/index" %>
+		<div class="col-md-offset-9">
+			<%= link_to new_orden_orden_cantidad_path(@orden), remote: true do %>
+					<button class="btn btn-default">Agregar producto</button>
+			<% end %><p></p>
+		</div.
 	</div>
 </div>
 

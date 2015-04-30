@@ -33,6 +33,7 @@
       <%= f.collection_select(:vendedor_id, Vendedor.all.order('nombre asc'), :id, :nombre, {prompt: "Selecciona"}, {class: "form-control"}) %>
     </div>
 		<div class="actions">
+		  <%= link_to 'Cancelar', clientes_path, class: "btn btn-default" %>
 		  <%= f.submit 'Enviar', class: "btn btn-default" %>
 		</div>
 	</div>

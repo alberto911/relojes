@@ -25,6 +25,7 @@
 		  <%= f.text_field :telefono, class: "form-control" %>
 		</div>
 		<div class="actions">
+		  <%= link_to 'Cancelar', cliente_tiendas_clientes_path(@tienda_cliente.cliente), class: "btn btn-default" %>
 		  <%= f.submit 'Enviar', class: "btn btn-default" %>
 		</div>
   </div>
