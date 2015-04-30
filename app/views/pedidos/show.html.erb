@@ -1,0 +1,35 @@
+<div class="row">	
+	<div class="col-lg-4">
+		<h2 class="page-header">Pedido</h2>
+		<p>
+			<strong>Proveedor:</strong>
+			<%= @pedido.proveedor.nombre %>
+		</p>
+
+		<p>
+			<strong>Fecha pedido:</strong>
+			<%= @pedido.created_at %>
+		</p>
+
+		<p>
+			<strong>Fecha entrega:</strong>
+			<%= @pedido.fecha_entrega %>
+		</p>
+
+		<%= link_to new_pedido_pedido_cantidad_path(@pedido), remote: true do %>
+			<button class="btn btn-default">Agregar producto</button>
+		<% end %><p></p>
+
+		<%= link_to 'Back', pedidos_path %>
+	</div>
+
+	<div class="col-lg-8">
+		<%= render "pedidos_cantidades/index" %>
+	</div>
+</div>
+
+<div class="row">
+  <div class="col-lg-6">
+		<div id="cantidad-form" style="display:none;"></div>
+	</div>
+</div>

@@ -1,5 +1,6 @@
 class Proveedor < ActiveRecord::Base
-	has_many :relojes, inverse_of: :proveedor, dependent: :destroy	
+	has_many :relojes, inverse_of: :proveedor, dependent: :destroy
+  has_many :pedidos, inverse_of: :proveedor
 	
 	validates :nombre, :telefono, :direccion, :rfc, presence: true
   validates :nombre, :telefono, :rfc, uniqueness: true  
