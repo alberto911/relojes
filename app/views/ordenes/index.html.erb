@@ -22,7 +22,7 @@
 					<td>
 						<% if orden.entregada? %>
 							<%= orden.fecha_entrega %>
-						<% else %>
+						<% elsif !orden.ordenes_cantidades.empty? && current_user.is_admin %>
 							<%= link_to 'Asignar repartidor', asignar_repartidor_path(orden), class: "btn btn-success btn-sm" %>
 						<% end %>
 					</td>

@@ -18,7 +18,7 @@
 		      <td>
 						<% if pedido.recibido? %>	
 							<%= pedido.fecha_entrega %>
-						<% else %>
+						<% elsif !pedido.pedidos_cantidades.empty? %>
 							<%= link_to 'Recibir', recibir_pedido_path(pedido), class: "btn btn-success btn-sm" %>
 						<% end %>
 					</td>

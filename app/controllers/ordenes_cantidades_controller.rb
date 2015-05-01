@@ -1,31 +1,18 @@
 class OrdenesCantidadesController < ApplicationController
-  before_action :set_orden_cantidad, only: [:show, :edit, :update, :destroy]
-  before_action :set_orden, only: [:index, :new, :create, :edit, :update, :destroy]
+  before_action :ensure_vendedor!
+  before_action :validar_permisos, except: :update_relojes
+  before_action :set_orden_cantidad, only: [:edit, :update, :destroy]
   respond_to :html, :js
-
-  # GET /ordenes_cantidades
-  # GET /ordenes_cantidades.json
-  def index
-    @ordenes_cantidades = @orden.ordenes_cantidades
-		render layout: "dataTables"
-  end
-
-  # GET /ordenes_cantidades/1
-  # GET /ordenes_cantidades/1.json
-  def show
-  end
 
   # GET /ordenes_cantidades/new
   def new
     @orden_cantidad = @orden.ordenes_cantidades.build
-		@proveedores = Proveedor.joins(:relojes).distinct.order('nombre asc')
-		@relojes = Reloj.all
+		set_options_for_selects
   end
 
   # GET /ordenes_cantidades/1/edit
   def edit
-		@proveedores = Proveedor.joins(:relojes).distinct.order('nombre asc')
-		@relojes = Reloj.all
+		set_options_for_selects
   end
 
   # POST /ordenes_cantidades
@@ -79,14 +66,22 @@ class OrdenesCantidadesController < ApplicationController
   end
 
   private
+		def validar_permisos
+			@orden = Orden.find(params[:orden_id])
+			unless current_user.tiene_permiso_sobre? @orden
+				redirect_to ordenes_url, alert: 'No tienes los permisos necesarios.'
+			end
+		end
+
+		def set_options_for_selects
+			@proveedores = Proveedor.con_relojes
+			@relojes = Reloj.all
+		end
+		
     # Use callbacks to share common setup or constraints between actions.
     def set_orden_cantidad
       @orden_cantidad = OrdenCantidad.find(params[:id])
     end
-
-		def set_orden
-			@orden = Orden.find(params[:orden_id])
-		end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def orden_cantidad_params

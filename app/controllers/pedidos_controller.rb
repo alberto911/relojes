@@ -53,15 +53,19 @@ class PedidosController < ApplicationController
   end
 
   def recibir
-		@pedido.transaction do
-			@pedido.update(fecha_entrega: Time.now)
-			cantidades = @pedido.pedidos_cantidades
-			@pedido.relojes.each do |reloj|
-				reloj.stock += cantidades.where(reloj_id: reloj.id).first.cantidad
-				reloj.save
+		unless @pedido.pedidos_cantidades.empty?
+			@pedido.transaction do
+				@pedido.update(fecha_entrega: Time.now)
+				cantidades = @pedido.pedidos_cantidades
+				@pedido.relojes.each do |reloj|
+					reloj.stock += cantidades.where(reloj_id: reloj.id).first.cantidad
+					reloj.save
+				end
 			end
+			redirect_to :back, notice: 'El pedido fue recibido exitosamente.'
+		else
+			redirect_to pedidos_url, alert: 'No hay productos en el pedido.'
 		end
-		redirect_to :back, notice: 'El pedido fue recibido exitosamente.'
 	end
 
   private

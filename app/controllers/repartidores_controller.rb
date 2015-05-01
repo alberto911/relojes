@@ -1,4 +1,5 @@
 class RepartidoresController < ApplicationController
+  before_action :ensure_admin!
   before_action :set_repartidor, only: [:show, :edit, :update, :destroy]
 
   # GET /repartidores

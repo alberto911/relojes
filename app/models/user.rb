@@ -6,4 +6,12 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+	def tiene_permiso_sobre?(objeto)
+		unless is_admin?
+			vendedor == objeto.vendedor
+		else
+			true
+		end
+	end
 end
