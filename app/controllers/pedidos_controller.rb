@@ -1,4 +1,5 @@
 class PedidosController < ApplicationController
+  before_action :ensure_admin!
   before_action :set_pedido, only: [:show, :edit, :update, :destroy, :recibir]
 
   # GET /pedidos
@@ -40,10 +41,14 @@ class PedidosController < ApplicationController
   # DELETE /pedidos/1
   # DELETE /pedidos/1.json
   def destroy
-    @pedido.destroy
-    respond_to do |format|
-      format.html { redirect_to pedidos_url, notice: 'Pedido was successfully destroyed.' }
-      format.json { head :no_content }
+		unless @pedido.recibido?    
+			@pedido.destroy
+		  respond_to do |format|
+		    format.html { redirect_to pedidos_url, notice: 'Pedido was successfully destroyed.' }
+		    format.json { head :no_content }
+		  end
+		else		
+			redirect_to :back, alert: 'No se puede borrar un pedido que ya ha sido recibido.'
     end
   end
 

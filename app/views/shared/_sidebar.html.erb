@@ -14,11 +14,11 @@
                 <!-- /input-group -->
             </li>
             <li>
-                <a href="index.html"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a>
+                <a href="/"><span class="glyphicon glyphicon-dashboard"></span> Inicio</a>
             </li>
             <li>
                 <a data-toggle="collapse" data-target="#charts" aria-expanded="false" aria-controls="coll">
-								<span class="glyphicon glyphicon-stats"></span> Charts<span class="fa arrow"></span></a>
+								<span class="glyphicon glyphicon-stats"></span> Estadísticas<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" id="charts">
                     <li>
                         <a href="flot.html">Flot Charts</a>
@@ -34,13 +34,19 @@
                 <span class="glyphicon glyphicon-list-alt"></span> Tablas<span class="fa arrow"></span></a>
 								<ul class="nav nav-second-level collapse" id="tablas">
 										<li>
+                        <%= link_to 'Órdenes', ordenes_path %></td>
+                    </li>              
+										<li>
+                        <%= link_to 'Pedidos', pedidos_path %></td>
+                    </li>
+										<li>
+                        <%= link_to 'Relojes', relojes_path %></td>
+                    </li>										
+										<li>
                         <%= link_to 'Clientes', clientes_path %></td>
                     </li>              
 										<li>
                         <%= link_to 'Proveedores', proveedores_path %></td>
-                    </li>
-                    <li>
-                        <%= link_to 'Relojes', relojes_path %></td>
                     </li>
 										<li>
                         <%= link_to 'Vendedores', vendedores_path %></td>
@@ -55,86 +61,27 @@
 								<span class="glyphicon glyphicon-edit"></span> Crear nuevo<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" id="crear">
                     <li>
+                        <%= link_to 'Orden', new_orden_path %></td>
+                    </li>
+                    <li>
+                        <%= link_to 'Pedido', new_pedido_path %></td>
+                    </li>
+                    <li>
+                        <%= link_to 'Reloj', new_reloj_path %></td>
+                    </li>
+                    <li>
                         <%= link_to 'Cliente', new_cliente_path %></td>
                     </li>                  
 										<li>
                         <%= link_to 'Proveedor', new_proveedor_path %></td>
                     </li>
-                    <li>
-                        <%= link_to 'Reloj', new_reloj_path %></td>
-                    </li>
+                    
 										<li>
                         <%= link_to 'Vendedor', new_vendedor_path %></td>
                     </li>
 										<li>
                         <%= link_to 'Repartidor', new_repartidor_path %></td>
                     </li> 
-                </ul>
-                <!-- /.nav-second-level -->
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="panels-wells.html">Panels and Wells</a>
-                    </li>
-                    <li>
-                        <a href="buttons.html">Buttons</a>
-                    </li>
-                    <li>
-                        <a href="notifications.html">Notifications</a>
-                    </li>
-                    <li>
-                        <a href="typography.html">Typography</a>
-                    </li>
-                    <li>
-                        <a href="icons.html"> Icons</a>
-                    </li>
-                    <li>
-                        <a href="grid.html">Grid</a>
-                    </li>
-                </ul>
-                <!-- /.nav-second-level -->
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="#">Second Level Item</a>
-                    </li>
-                    <li>
-                        <a href="#">Second Level Item</a>
-                    </li>
-                    <li>
-                        <a href="#">Third Level <span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level">
-                            <li>
-                                <a href="#">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Third Level Item</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-third-level -->
-                    </li>
-                </ul>
-                <!-- /.nav-second-level -->
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="blank.html">Blank Page</a>
-                    </li>
-                    <li>
-                        <a href="login.html">Login Page</a>
-                    </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>

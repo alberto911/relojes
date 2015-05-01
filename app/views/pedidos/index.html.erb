@@ -19,12 +19,14 @@
 						<% if pedido.recibido? %>	
 							<%= pedido.fecha_entrega %>
 						<% else %>
-							<%= link_to 'Recibir', recibir_pedido_path(pedido), class: "btn btn-default" %>
+							<%= link_to 'Recibir', recibir_pedido_path(pedido), class: "btn btn-success btn-sm" %>
 						<% end %>
 					</td>
 					<td>
 						<%= link_to "<span class=\"glyphicon glyphicon-info-sign\"></span>".html_safe, pedido %>
-						<%= link_to "<span class=\"glyphicon glyphicon-remove\"></span>".html_safe, pedido, method: :delete, data: { confirm: 'Are you sure?' } %>
+						<% unless pedido.recibido? %>
+							<%= link_to "<span class=\"glyphicon glyphicon-remove\"></span>".html_safe, pedido, method: :delete, data: { confirm: 'Are you sure?' } %>
+						<% end %>
 					</td>
 		    </tr>
 		  <% end %>

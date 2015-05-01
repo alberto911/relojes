@@ -1,5 +1,5 @@
 class Repartidor < ActiveRecord::Base
-	belongs_to :user, dependent: :destroy
+	belongs_to :user, inverse_of: :repartidor, dependent: :destroy
 	has_many :ordenes, inverse_of: :repartidor, dependent: :nullify
 
   validates :nombre, :telefono, :rfc, :direccion, presence: true

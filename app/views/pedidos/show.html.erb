@@ -10,15 +10,17 @@
 			<strong>Fecha pedido:</strong>
 			<%= @pedido.created_at %>
 		</p>
-
-		<p>
-			<strong>Fecha entrega:</strong>
-			<%= @pedido.fecha_entrega %>
-		</p>
-
-		<%= link_to new_pedido_pedido_cantidad_path(@pedido), remote: true do %>
-			<button class="btn btn-default">Agregar producto</button>
-		<% end %><p></p>
+		
+		<% if @pedido.recibido? %>
+			<p>
+				<strong>Fecha recibido:</strong>
+				<%= @pedido.fecha_entrega %>
+			</p>
+		<% else %>
+			<%= link_to new_pedido_pedido_cantidad_path(@pedido), remote: true do %>
+				<button class="btn btn-default">Agregar producto</button>
+			<% end %><p></p>
+		<% end %>
 
 		<%= link_to 'Back', pedidos_path %>
 	</div>

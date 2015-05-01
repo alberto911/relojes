@@ -1,5 +1,5 @@
 class Vendedor < ActiveRecord::Base
-	belongs_to :user, dependent: :destroy
+	belongs_to :user, inverse_of: :vendedor, dependent: :destroy
 	has_many :clientes, inverse_of: :vendedor, dependent: :restrict_with_error
 
   validates :nombre, :telefono, :rfc, presence: true

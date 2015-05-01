@@ -1,4 +1,5 @@
 class ProveedoresController < ApplicationController
+  before_action :ensure_admin!
   before_action :set_proveedor, only: [:show, :edit, :update, :destroy]
 
   # GET /proveedores

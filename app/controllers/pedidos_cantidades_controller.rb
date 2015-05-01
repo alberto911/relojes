@@ -1,6 +1,8 @@
 class PedidosCantidadesController < ApplicationController
+  before_action :ensure_admin!
   before_action :set_pedido_cantidad, only: [:edit, :update, :destroy]
   before_action :set_pedido
+  before_action :verificar_no_recibido, only: [:new, :create, :edit, :update, :destroy]
   respond_to :html, :js
 
   # GET /pedidos_cantidades
@@ -67,7 +69,13 @@ class PedidosCantidadesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+		def verificar_no_recibido
+			if @pedido.recibido?
+				redirect_to pedido_url(@pedido), alert: 'No se puede alterar un pedido que ya ha sido recibido.'
+			end
+		end 
+		
+		# Use callbacks to share common setup or constraints between actions.
     def set_pedido_cantidad
       @pedido_cantidad = PedidoCantidad.find(params[:id])
     end

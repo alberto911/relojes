@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
+	has_one :vendedor, inverse_of: :user
+  has_one :repartidor, inverse_of: :user
+
+	# Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
