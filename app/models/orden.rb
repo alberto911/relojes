@@ -21,4 +21,5 @@ class Orden < ActiveRecord::Base
 	def tiene_repartidor?
 		!repartidor.nil?
 	end
+
 end

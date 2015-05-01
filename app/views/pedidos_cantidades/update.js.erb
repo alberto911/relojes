@@ -1,2 +1,3 @@
 $('#cantidades').html("<%= j (render @pedidos_cantidades) %>");
+$('#total').html("<%= j ("#{@pedido.total}") %>");
 $('#cantidad-form').slideUp(350);

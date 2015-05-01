@@ -8,4 +8,13 @@ class Pedido < ActiveRecord::Base
 	def recibido?
 		!fecha_entrega.nil?
 	end
+
+	def total
+	  	total = 0
+		pedidos_cantidades.each do |pc|
+			total += pc.subtotal
+		end
+		total
+	end
+
 end
