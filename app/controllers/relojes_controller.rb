@@ -1,4 +1,6 @@
 class RelojesController < ApplicationController
+  before_action :ensure_admin!, except: [:index, :show]
+	before_action :ensure_vendedor!, only: [:index, :show]
   before_action :set_reloj, only: [:show, :edit, :update, :destroy]
 
   # GET /relojes

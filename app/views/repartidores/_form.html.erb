@@ -19,7 +19,7 @@
 		<div class="form-group">
 		  <%= f.label :password %>
 			<% if params[:action] == 'edit' %>
-				<i>(leave blank if you don't want to change it)</i>
+				<i>(dejar en blanco si no se desea cambiar)</i>
 			<% end %>
 			<br>
 		  <%= password_field :user, :password, autocomplete: "off", class: "form-control" %>

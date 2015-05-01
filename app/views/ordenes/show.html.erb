@@ -9,6 +9,13 @@
 				<%= @orden.tienda_cliente.nombre %>
 			</p>
 
+			<% if @orden.tiene_repartidor? %>
+				<p>
+					<strong>Repartidor:</strong>
+					<%= @orden.repartidor.nombre %>
+				</p>
+			<% end %>
+
 			<p>
 				<strong>Fecha pedido:</strong>
 				<%= @orden.created_at %>

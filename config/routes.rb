@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 		resources :ordenes_cantidades, except: [:index, :show]
 	end
 
+	get 'ordenes/asignar_repartidor/:id', to: 'ordenes#asignar_repartidor', as: 'asignar_repartidor'
+
   resources :repartidores
 
   resources :clientes do
@@ -34,7 +36,10 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'proveedores#index'
+  root 'home#inicio'
+
+	# Redirect to root if no route matches
+	get '*path' => redirect('/')
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

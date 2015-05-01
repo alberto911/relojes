@@ -19,7 +19,13 @@
 					<td><%= orden.tienda_cliente.cliente.nombre %></td>
 					<td><%= orden.tienda_cliente.nombre %></td>
 					<td><%= orden.created_at %></td>
-					<td><%= orden.fecha_entrega %></td>
+					<td>
+						<% if orden.entregada? %>
+							<%= orden.fecha_entrega %>
+						<% else %>
+							<%= link_to 'Asignar repartidor', asignar_repartidor_path(orden), class: "btn btn-success btn-sm" %>
+						<% end %>
+					</td>
 					<td><%= orden.total %></td>
 					<td><%= link_to "<span class=\"glyphicon glyphicon-info-sign\"></span>".html_safe, orden %>
 					<%= link_to "<span class=\"glyphicon glyphicon-pencil\"></span>".html_safe, edit_orden_path(orden) %>

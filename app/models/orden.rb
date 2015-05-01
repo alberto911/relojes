@@ -13,4 +13,12 @@ class Orden < ActiveRecord::Base
 		end
 		total
 	end
+
+	def entregada?
+		!fecha_entrega.nil?
+  end
+
+	def tiene_repartidor?
+		!repartidor.nil?
+	end
 end

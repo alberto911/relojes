@@ -1,5 +1,5 @@
 class OrdenesController < ApplicationController
-  before_action :set_orden, only: [:show, :edit, :update, :destroy]
+  before_action :set_orden, only: [:show, :edit, :update, :destroy, :asignar_repartidor]
 
   # GET /ordenes
   # GET /ordenes.json
@@ -73,6 +73,10 @@ class OrdenesController < ApplicationController
 		@tiendas_clientes = cliente.tiendas_clientes.map{|t| [t.nombre, t.id]}.insert(0, "Selecciona una tienda")
 	end
 
+	def asignar_repartidor
+		@repartidores = Repartidor.all
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_orden
@@ -81,6 +85,6 @@ class OrdenesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def orden_params
-      params.require(:orden).permit(:fecha_entrega, :tienda_cliente_id)
+      params.require(:orden).permit(:fecha_entrega, :tienda_cliente_id, :repartidor_id)
     end
 end

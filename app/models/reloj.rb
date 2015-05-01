@@ -5,7 +5,7 @@ class Reloj < ActiveRecord::Base
   has_many :pedidos_cantidades
   has_many :pedidos, through: :pedidos_cantidades
 	
-	validates :marca, :modelo, :descripcion, :precio, :proveedor_id, presence: true
+	validates :marca, :modelo, :descripcion, :precio, :proveedor_id, presence: { message: "no puede estar vacío" }
 	validates :modelo, uniqueness: true
 	validates :marca, :modelo, length: { maximum: 25 }
   validates :descripcion, length: { maximum: 100 }

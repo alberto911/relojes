@@ -1,0 +1,14 @@
+<h2 class="page-header">Asignar repartidor</h2>
+
+<%= form_for(@orden) do |f| %>
+	<div class="col-lg-6">
+		<div class="form-group">
+		  <label>Repartidor</label><br>
+		  <%= f.collection_select(:repartidor_id, @repartidores, :id, :nombre, {prompt: "Selecciona"}, {class: "form-control"}) %>
+		</div>
+		<div class="actions">
+		  <%= f.submit 'Enviar', class: "btn btn-default" %>
+			<%= link_to 'Cancelar', ordenes_path,  class: "btn btn-default" %> 	
+		</div>
+	</div>
+<% end %>
