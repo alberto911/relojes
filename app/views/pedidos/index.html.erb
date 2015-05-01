@@ -6,6 +6,7 @@
 				<th>Proveedor</th>
 		    <th>Fecha pedido</th>
 		    <th>Fecha recibido</th>
+			<th>Total</th>
 		    <th></th>
 		  </tr>
 		</thead>
@@ -21,7 +22,8 @@
 						<% elsif !pedido.pedidos_cantidades.empty? %>
 							<%= link_to 'Recibir', recibir_pedido_path(pedido), class: "btn btn-success btn-sm" %>
 						<% end %>
-					</td>
+			  </td>
+			  <td><%= pedido.total %></td>	
 					<td>
 						<%= link_to "<span class=\"glyphicon glyphicon-info-sign\"></span>".html_safe, pedido %>
 						<% unless pedido.recibido? %>
