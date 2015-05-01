@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+	get ':controller(/:action)', controller: /[^\/]+/, action: /stats/	
+
   resources :pedidos, except: [:edit, :update] do
 		resources :pedidos_cantidades, except: [:index, :show]
 	end

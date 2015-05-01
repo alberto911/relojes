@@ -10,6 +10,10 @@ class RelojesController < ApplicationController
 		render layout: "dataTables"
   end
 
+	def stats
+		render layout: "dataTables"
+  end
+
   # GET /relojes/1
   # GET /relojes/1.json
   def show
