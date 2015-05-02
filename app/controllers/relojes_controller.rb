@@ -10,7 +10,7 @@ class RelojesController < ApplicationController
 		render layout: "dataTables"
   end
 
-	def stats
+  def stats
 		render layout: "dataTables"
   end
 

@@ -8,6 +8,10 @@ class OrdenesController < ApplicationController
 		render layout: "dataTables"
   end
 
+  def stats
+		render layout: "dataTables"
+  end
+
   # GET /ordenes/1
   # GET /ordenes/1.json
   def show

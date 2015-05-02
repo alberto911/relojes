@@ -1,0 +1,25 @@
+<h2 class="page-header">Estadísticas de compras</h2>
+
+<div class = row>
+	<div class="col-lg-12"> 
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Compras por día 
+			</div>                       
+			<div class="panel-body">
+			<%= area_chart(Pedido.compras_dia) %>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-12"> 
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Compras por proveedor 
+			</div>                       
+			<div class="panel-body">
+			<%= column_chart(Pedido.compras_proveedor) %>
+			</div>
+		</div>
+	</div>
+</div>

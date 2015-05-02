@@ -8,6 +8,10 @@ class PedidosController < ApplicationController
     @pedidos = Pedido.all
 		render layout: "dataTables"
   end
+  
+  def stats
+		render layout: "dataTables"
+  end
 
   # GET /pedidos/1
   # GET /pedidos/1.json

@@ -29,41 +29,4 @@ class Reloj < ActiveRecord::Base
 	def self.stock_proveedor
 		joins("join proveedores p on relojes.proveedor_id = p.id").group("p.nombre").sum("stock")
 	end
-
-	def self.ventas_dia
-		data = {}
-		Orden.all.map do |o|
-			fecha = o.created_at.to_date
-			data.has_key?(fecha) ? data[fecha] += o.total : data[fecha] = o.total
-		end
-		data
-	end
-	
-	def self.ventas_proveedor
-		data = {}
-		OrdenCantidad.all.map do |oc|
-			proveedor = oc.reloj.proveedor.nombre
-			data.has_key?(proveedor) ? data[proveedor] += oc.subtotal : data[proveedor] = oc.subtotal
-		end
-		data
-	end
-
-	def self.compras_dia
-		data = {}
-		Pedido.all.map do |p|
-			fecha = p.created_at.to_date
-			data.has_key?(fecha) ? data[fecha] += p.total : data[fecha] = p.total
-		end
-		data
-	end
-
-	def self.compras_proveedor
-		data = {}
-		PedidoCantidad.all.map do |pc|
-			proveedor = pc.pedido.proveedor.nombre
-			data.has_key?(proveedor) ? data[proveedor] += pc.subtotal : data[proveedor] = pc.subtotal
-		end
-		data
-	end
-
 end
