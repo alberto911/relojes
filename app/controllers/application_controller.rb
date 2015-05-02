@@ -23,6 +23,14 @@ class ApplicationController < ActionController::Base
     end
 	end
 
+	def ensure_repartidor!
+		unless current_user.is_admin || current_user.repartidor
+      sign_out current_user
+      redirect_to root_path
+      return false
+    end
+	end
+
 	def back_to_root
 		redirect_to root_path
 	end

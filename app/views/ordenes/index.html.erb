@@ -15,25 +15,25 @@
 
   		<tbody>
     		<% @ordenes.each do |orden| %>
-      			<tr>
+      	<tr>
 					<td><%= orden.tienda_cliente.cliente.nombre %></td>
 					<td><%= orden.tienda_cliente.nombre %></td>
 					<td><%= orden.fecha_pedido %></td>
 					<td>
 						<% if orden.entregada? %>
 							<%= orden.fecha_entrega %>
-						<% elsif orden.fecha_pedido && current_user.is_admin %>
-							<%= link_to 'Asignar repartidor', asignar_repartidor_path(orden), class: "btn btn-success btn-sm" %>
+						<% elsif orden.repartidor && current_user.is_admin %>
+							<%= link_to 'Marcar entregada', entregar_orden_path(orden), class: "btn btn-success btn-sm" %>
 						<% end %>
 					</td>
 					<td><%= orden.total %></td>
 					<td><%= link_to "<span class=\"glyphicon glyphicon-info-sign\"></span>".html_safe, orden %>
 					<% unless orden.fecha_pedido %>
-					<%= link_to "<span class=\"glyphicon glyphicon-pencil\"></span>".html_safe, edit_orden_path(orden) %>
-					<%= link_to "<span class=\"glyphicon glyphicon-remove\"></span>".html_safe, orden, method: :delete, data: { confirm: 'Are you sure?' } %>
+						<%= link_to "<span class=\"glyphicon glyphicon-pencil\"></span>".html_safe, edit_orden_path(orden) %>
+						<%= link_to "<span class=\"glyphicon glyphicon-remove\"></span>".html_safe, orden, method: :delete, data: { confirm: 'Are you sure?' } %>
 					<% end %>
 					</td>
-      			</tr>
+      	</tr>
 			<% end %>
 		</tbody>
 	</table>

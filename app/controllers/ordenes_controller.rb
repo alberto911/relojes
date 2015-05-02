@@ -1,8 +1,11 @@
 class OrdenesController < ApplicationController
-  before_action :ensure_vendedor!
+  before_action :ensure_vendedor!, except: [:entregar, :asignar_repartidor, :update_repartidor]
+  before_action :ensure_admin!, only: [:asignar_repartidor, :update_repartidor]
+  before_action :ensure_repartidor!, only: :entregar
   before_action :validar_permisos, only: [:show, :edit, :update, :destroy, :place]
 	before_action :ensure_not_placed, only: [:edit, :update, :destroy]
   before_action :set_vendedor, only: [:index, :new, :edit]
+  before_action :set_orden, only: [:asignar_repartidor, :update_repartidor, :entregar]
 
   # GET /ordenes
   # GET /ordenes.json
@@ -40,7 +43,7 @@ class OrdenesController < ApplicationController
 
     respond_to do |format|
       if current_user.tiene_permiso_sobre?(@orden) && @orden.save
-        format.html { redirect_to @orden, notice: 'Orden was successfully created.' }
+        format.html { redirect_to @orden, notice: 'La orden se creó exitosamente.' }
         format.json { render :show, status: :created, location: @orden }
       else
         format.html { render :new }
@@ -54,7 +57,7 @@ class OrdenesController < ApplicationController
   def update
     respond_to do |format|
       if @orden.update(orden_params)
-        format.html { redirect_to @orden, notice: 'Orden was successfully updated.' }
+        format.html { redirect_to @orden, notice: 'La orden se actualizó exitosamente.' }
         format.json { render :show, status: :ok, location: @orden }
       else
         format.html { render :edit }
@@ -68,7 +71,7 @@ class OrdenesController < ApplicationController
   def destroy
 		@orden.destroy
 	  respond_to do |format|
-	    format.html { redirect_to ordenes_url, notice: 'Orden was successfully destroyed.' }
+	    format.html { redirect_to ordenes_url, notice: 'La orden se borró exitosamente.' }
 	    format.json { head :no_content }
 	  end
   end
@@ -88,14 +91,38 @@ class OrdenesController < ApplicationController
 	end
 
 	def asignar_repartidor
-		ensure_admin!
-		set_orden
-		if @orden.fecha_pedido		
+		if @orden.fecha_pedido && !@orden.entregada?
 			@repartidores = Repartidor.all
 		else
-			redirect_to ordenes_url, alert: 'No puedes asignar una orden que no ha sido completada.'
+			redirect_to ordenes_url, alert: 'No puedes asignar esta orden a un repartidor.'
 		end
   end
+
+	def update_repartidor
+		permitted = params.require(:orden).permit(:repartidor_id)
+		if permitted[:repartidor_id].nil?
+			redirect_to :asignar_repartidor, alert: 'El repartidor no puede estar vacío.'
+		elsif @orden.fecha_pedido && !@orden.entregada?
+      @orden.update(permitted)
+			redirect_to @orden, notice: 'El repartidor se asignó exitosamente.'
+		end
+	end
+
+	def entregar
+		if !current_user.is_admin
+			if @orden.repartidor != current_user.repartidor
+				redirect_to reparto_path, alert: 'No puedes entregar una orden que no te hayan asignado.'
+			else
+				@orden.update(fecha_entrega: Time.now)
+				redirect_to reparto_path, notice: 'La orden se marcó como entregada.'
+			end
+		elsif @orden.fecha_pedido && @orden.repartidor
+			@orden.update(fecha_entrega: Time.now)
+			redirect_to ordenes_url, notice: 'La orden se marcó como entregada.'
+		else
+			redirect_to ordenes_url, alert: 'La orden no ha sido completada.'
+		end
+	end
 
   private
 		def set_options_for_selects(vendedor)

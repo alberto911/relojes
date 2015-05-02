@@ -5,15 +5,17 @@ Rails.application.routes.draw do
 		resources :pedidos_cantidades, except: [:index, :show]
 	end
 
-	get 'pedidos/recibir/:id', to: 'pedidos#recibir', as: 'recibir_pedido'
-  get 'pedidos/place/:id', to: 'pedidos#place', as: 'place_pedido'
+	get 'pedidos/:id/recibir', to: 'pedidos#recibir', as: 'recibir_pedido'
+  get 'pedidos/:id/place', to: 'pedidos#place', as: 'place_pedido'
 
   resources :ordenes do
 		resources :ordenes_cantidades, except: [:index, :show]
 	end
 
-	get 'ordenes/asignar_repartidor/:id', to: 'ordenes#asignar_repartidor', as: 'asignar_repartidor'
-  get 'ordenes/place/:id', to: 'ordenes#place', as: 'place_orden'
+  get 'ordenes/:id/place', to: 'ordenes#place', as: 'place_orden'
+  get 'ordenes/:id/asignar_repartidor', to: 'ordenes#asignar_repartidor', as: 'asignar_repartidor'
+	patch 'ordenes/:id/update_repartidor', to: 'ordenes#update_repartidor', as: 'update_repartidor'
+  get 'ordenes/:id/entregar', to: 'ordenes#entregar', as: 'entregar_orden'
 
   resources :repartidores
 
@@ -35,6 +37,7 @@ Rails.application.routes.draw do
 
 	post 'ordenes/update_tiendas', as: 'update_tiendas'
 	post 'ordenes_cantidades/update_relojes', as: 'update_relojes'
+  get 'reparto', to: 'reparto#index', as: 'reparto'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
