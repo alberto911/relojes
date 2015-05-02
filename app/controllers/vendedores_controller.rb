@@ -12,6 +12,7 @@ class VendedoresController < ApplicationController
   # GET /vendedores/1
   # GET /vendedores/1.json
   def show
+		render layout: "dataTables"
   end
 
   # GET /vendedores/new

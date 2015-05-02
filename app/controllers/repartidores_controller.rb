@@ -12,6 +12,7 @@ class RepartidoresController < ApplicationController
   # GET /repartidores/1
   # GET /repartidores/1.json
   def show
+		render layout: "dataTables"
   end
 
   # GET /repartidores/new
