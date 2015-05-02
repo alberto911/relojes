@@ -18,13 +18,15 @@
 
 			<p>
 				<strong>Fecha pedido:</strong>
-				<%= @orden.created_at %>
+				<%= @orden.fecha_pedido %>
 			</p>
 
+			<% if @orden.entregada? %>
 			<p>
 				<strong>Fecha entrega:</strong>
 				<%= @orden.fecha_entrega %>
 			</p>
+			<% end %>
 
 			<p>
 				<strong>Total:</strong>
@@ -32,17 +34,24 @@
 			</p>
 		</div>
 
-		<%= link_to 'Editar', edit_orden_path(@orden),  class: "btn btn-default" %> 
+		<% unless @orden.fecha_pedido %>
+		<%= link_to 'Editar', edit_orden_path(@orden),  class: "btn btn-default" %>
+		<% end %>
 		<%= link_to 'Regresar', ordenes_path,  class: "btn btn-default" %>
 	</div>
 
 	<div class="col-lg-8">
 		<%= render "ordenes_cantidades/index" %>
-		<div class="col-md-offset-9">
+
+		<% unless @orden.fecha_pedido %>
+		<div class="col-md-offset-6">
 			<%= link_to new_orden_orden_cantidad_path(@orden), remote: true do %>
 					<button class="btn btn-default">Agregar producto</button>
-			<% end %><p></p>
-		</div.
+			<% end %>
+			<%= link_to 'Completar orden', place_orden_path(@orden), class: "btn btn-default" %>
+		</div>
+		<% end %>
+
 	</div>
 </div>
 

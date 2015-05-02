@@ -1,8 +1,8 @@
 class OrdenesController < ApplicationController
   before_action :ensure_vendedor!
-  before_action :validar_permisos, only: [:show, :edit, :destroy]
+  before_action :validar_permisos, only: [:show, :edit, :update, :destroy, :place]
+	before_action :ensure_not_placed, only: [:edit, :update, :destroy]
   before_action :set_vendedor, only: [:index, :new, :edit]
-  before_action :set_orden, only: [:update, :asignar_repartidor]
 
   # GET /ordenes
   # GET /ordenes.json
@@ -49,7 +49,7 @@ class OrdenesController < ApplicationController
   # PATCH/PUT /ordenes/1.json
   def update
     respond_to do |format|
-      if current_user.tiene_permiso_sobre?(@orden) && @orden.update(orden_params)
+      if @orden.update(orden_params)
         format.html { redirect_to @orden, notice: 'Orden was successfully updated.' }
         format.json { render :show, status: :ok, location: @orden }
       else
@@ -74,12 +74,22 @@ class OrdenesController < ApplicationController
 		@tiendas_clientes = cliente.tiendas_clientes.map{|t| [t.nombre, t.id]}.insert(0, "Selecciona una tienda")
 	end
 
+  def place
+		unless @orden.ordenes_cantidades.empty?
+			@orden.update(fecha_pedido: Time.now)
+			redirect_to @orden, notice: 'La orden fue completada exitosamente.'
+		else
+			redirect_to @orden, alert: 'No hay productos en la orden.'
+		end
+	end
+
 	def asignar_repartidor
 		ensure_admin!
-		unless @orden.ordenes_cantidades.empty?		
+		set_orden
+		if @orden.fecha_pedido		
 			@repartidores = Repartidor.all
 		else
-			redirect_to ordenes_url, alert: 'No puedes asignar una orden vacía.'
+			redirect_to ordenes_url, alert: 'No puedes asignar una orden que no ha sido completada.'
 		end
   end
 
@@ -95,9 +105,16 @@ class OrdenesController < ApplicationController
 		end
 
 		def validar_permisos
-			@orden = Orden.find(params[:id])
+			set_orden
 			unless current_user.tiene_permiso_sobre? @orden
 				redirect_to ordenes_url, alert: 'No tienes los permisos necesarios.'
+			end
+		end
+
+		def ensure_not_placed
+			set_orden
+			if @orden.fecha_pedido
+				redirect_to orden_url(@orden), alert: 'No se puede alterar una orden que ya ha sido completada.'
 			end
 		end
 

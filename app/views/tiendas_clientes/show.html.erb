@@ -15,5 +15,7 @@
 		</div>
 	</div>
 </div>
+<% if current_user.is_admin %>
 <%= link_to 'Editar', edit_tienda_cliente_path(@tienda_cliente), class: "btn btn-default" %>
+<% end %>
 <%= link_to 'Regresar', cliente_tiendas_clientes_path(@tienda_cliente.cliente), class: "btn btn-default" %>

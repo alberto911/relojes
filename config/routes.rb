@@ -6,12 +6,14 @@ Rails.application.routes.draw do
 	end
 
 	get 'pedidos/recibir/:id', to: 'pedidos#recibir', as: 'recibir_pedido'
+  get 'pedidos/place/:id', to: 'pedidos#place', as: 'place_pedido'
 
   resources :ordenes do
 		resources :ordenes_cantidades, except: [:index, :show]
 	end
 
 	get 'ordenes/asignar_repartidor/:id', to: 'ordenes#asignar_repartidor', as: 'asignar_repartidor'
+  get 'ordenes/place/:id', to: 'ordenes#place', as: 'place_orden'
 
   resources :repartidores
 

@@ -1,6 +1,7 @@
 class OrdenesCantidadesController < ApplicationController
   before_action :ensure_vendedor!
   before_action :validar_permisos, except: :update_relojes
+  before_action :ensure_not_placed, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_orden_cantidad, only: [:edit, :update, :destroy]
   respond_to :html, :js
 
@@ -70,6 +71,13 @@ class OrdenesCantidadesController < ApplicationController
 			@orden = Orden.find(params[:orden_id])
 			unless current_user.tiene_permiso_sobre? @orden
 				redirect_to ordenes_url, alert: 'No tienes los permisos necesarios.'
+			end
+		end
+
+		def ensure_not_placed
+			@orden = Orden.find(params[:orden_id])
+			if @orden.fecha_pedido
+				redirect_to orden_url(@orden), alert: 'No se puede alterar una orden que ya ha sido completada.'
 			end
 		end
 

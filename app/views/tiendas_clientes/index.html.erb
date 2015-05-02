@@ -17,12 +17,17 @@
 		      <td><%= tienda_cliente.direccion %></td>
 		      <td><%= tienda_cliente.telefono %></td>
 		      <td><%= link_to "<span class=\"glyphicon glyphicon-info-sign\"></span>".html_safe, tienda_cliente %>
-		      <%= link_to "<span class=\"glyphicon glyphicon-pencil\"></span>".html_safe, edit_tienda_cliente_path(tienda_cliente) %>
-		      <%= link_to "<span class=\"glyphicon glyphicon-remove\"></span>".html_safe, tienda_cliente, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+					<% if current_user.is_admin %>
+				    <%= link_to "<span class=\"glyphicon glyphicon-pencil\"></span>".html_safe, edit_tienda_cliente_path(tienda_cliente) %>
+				    <%= link_to "<span class=\"glyphicon glyphicon-remove\"></span>".html_safe, tienda_cliente, method: :delete, data: { confirm: 'Are you sure?' } %>
+					<% end %>
+					</td>
 		    </tr>
 		  <% end %>
 		</tbody>
 	</table>
 </div>
 
+<% if current_user.is_admin %>
 <%= link_to 'Nueva tienda', new_cliente_tienda_cliente_path(@cliente), role: "button", class: "btn btn-outline btn-primary" %><br>
+<% end %>

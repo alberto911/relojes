@@ -2,20 +2,10 @@
 <div class="navbar-default sidebar" role="navigation">
     <div class="sidebar-nav navbar-collapse">
         <ul class="nav" id="side-menu">
-            <li class="sidebar-search">
-                <div class="input-group custom-search-form">
-                    <input type="text" class="form-control" placeholder="Search...">
-                    <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </button>
-                </span>
-                </div>
-                <!-- /input-group -->
-            </li>
             <li>
                 <a href="/"><span class="glyphicon glyphicon-dashboard"></span> Inicio</a>
             </li>
+            <% if current_user.is_admin %>
             <li>
                 <a data-toggle="collapse" data-target="#charts" aria-expanded="false" aria-controls="coll">
 								<span class="glyphicon glyphicon-stats"></span> Estadísticas<span class="fa arrow"></span></a>
@@ -29,62 +19,40 @@
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
+						<% end %>
+						<% unless current_user.repartidor %>
             <li>
 								<a data-toggle="collapse" data-target="#tablas" aria-expanded="false" aria-controls="coll">
                 <span class="glyphicon glyphicon-list-alt"></span> Tablas<span class="fa arrow"></span></a>
 								<ul class="nav nav-second-level collapse" id="tablas">
 										<li>
                         <%= link_to 'Órdenes', ordenes_path %></td>
-                    </li>              
-										<li>
-                        <%= link_to 'Pedidos', pedidos_path %></td>
                     </li>
+										<% if current_user.is_admin %>      
+												<li>
+				                    <%= link_to 'Pedidos', pedidos_path %></td>
+				                </li>
+										<% end %>
 										<li>
                         <%= link_to 'Relojes', relojes_path %></td>
                     </li>										
 										<li>
                         <%= link_to 'Clientes', clientes_path %></td>
-                    </li>              
-										<li>
-                        <%= link_to 'Proveedores', proveedores_path %></td>
-                    </li>
-										<li>
-                        <%= link_to 'Vendedores', vendedores_path %></td>
-                    </li>
-										<li>
-                        <%= link_to 'Repartidores', repartidores_path %></td>
-                    </li>
+                    </li>       
+										<% if current_user.is_admin %>       
+												<li>
+				                    <%= link_to 'Proveedores', proveedores_path %></td>
+				                </li>
+												<li>
+				                    <%= link_to 'Vendedores', vendedores_path %></td>
+				                </li>
+												<li>
+				                    <%= link_to 'Repartidores', repartidores_path %></td>
+				                </li>
+                    <% end %>
                 </ul>
             </li>
-            <li>
-								<a data-toggle="collapse" data-target="#crear" aria-expanded="false" aria-controls="coll">
-								<span class="glyphicon glyphicon-edit"></span> Crear nuevo<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse" id="crear">
-                    <li>
-                        <%= link_to 'Orden', new_orden_path %></td>
-                    </li>
-                    <li>
-                        <%= link_to 'Pedido', new_pedido_path %></td>
-                    </li>
-                    <li>
-                        <%= link_to 'Reloj', new_reloj_path %></td>
-                    </li>
-                    <li>
-                        <%= link_to 'Cliente', new_cliente_path %></td>
-                    </li>                  
-										<li>
-                        <%= link_to 'Proveedor', new_proveedor_path %></td>
-                    </li>
-                    
-										<li>
-                        <%= link_to 'Vendedor', new_vendedor_path %></td>
-                    </li>
-										<li>
-                        <%= link_to 'Repartidor', new_repartidor_path %></td>
-                    </li> 
-                </ul>
-                <!-- /.nav-second-level -->
-            </li>
+						<% end %>
         </ul>
     </div>
     <!-- /.sidebar-collapse -->

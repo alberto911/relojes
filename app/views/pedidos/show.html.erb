@@ -6,7 +6,7 @@
 		
 			<p>
 				<strong>Fecha pedido:</strong>
-				<%= @pedido.created_at %>
+				<%= @pedido.fecha_pedido %>
 			</p>
 		
 			<% if @pedido.recibido? %>
@@ -28,13 +28,16 @@
 
 	<div class="col-lg-8">
 		<%= render "pedidos_cantidades/index" %>
-		<% if !@pedido.recibido? %>
-			<%= link_to new_pedido_pedido_cantidad_path(@pedido), remote: true do %>
-			<div class="col-md-offset-9">					
-				<button class="btn btn-default">Agregar producto</button>
+
+		<% unless @pedido.fecha_pedido %>
+			<div class="col-md-offset-6">			
+				<%= link_to new_pedido_pedido_cantidad_path(@pedido), remote: true do %>		
+					<button class="btn btn-default">Agregar producto</button>
+				<% end %>
+				<%= link_to 'Completar pedido', place_pedido_path(@pedido), class: "btn btn-default" %>
 			</div>
-			<% end %><p></p>
 		<% end %>
+
 	</div>
 </div>
 

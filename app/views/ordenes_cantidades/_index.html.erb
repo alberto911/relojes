@@ -7,7 +7,9 @@
 				<th>Modelo</th>
 				<th>Cantidad</th>
 				<th>Subtotal</th>
-				<th></th>
+				<% unless @orden.fecha_pedido %>
+					<th></th>
+				<% end %>
 			</tr>
 		</thead>
 		<tbody id="cantidades">
