@@ -36,7 +36,7 @@
 
 		<% if !@orden.fecha_pedido %>
 			<%= link_to 'Editar', edit_orden_path(@orden),  class: "btn btn-default" %>
-		<% elsif @orden.repartidor && !@orden.entregada? %>
+		<% elsif !@orden.entregada? %>
 			<%= link_to 'Repartidor', asignar_repartidor_path(@orden),  class: "btn btn-default" %>
 		<% end %>
 		<%= link_to 'Regresar', ordenes_path,  class: "btn btn-default" %>
