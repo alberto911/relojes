@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150501230917) do
+ActiveRecord::Schema.define(version: 20150502051012) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,11 +28,12 @@ ActiveRecord::Schema.define(version: 20150501230917) do
 
   create_table "ordenes", force: :cascade do |t|
     t.date     "fecha_entrega"
-    t.integer  "tienda_cliente_id", null: false
+    t.integer  "tienda_cliente_id",                          null: false
     t.integer  "repartidor_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
     t.date     "fecha_pedido"
+    t.decimal  "total",             precision: 11, scale: 2
   end
 
   create_table "ordenes_cantidades", force: :cascade do |t|
@@ -47,10 +48,11 @@ ActiveRecord::Schema.define(version: 20150501230917) do
 
   create_table "pedidos", force: :cascade do |t|
     t.date     "fecha_entrega"
-    t.integer  "proveedor_id",  null: false
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.integer  "proveedor_id",                           null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.date     "fecha_pedido"
+    t.decimal  "total",         precision: 11, scale: 2
   end
 
   create_table "pedidos_cantidades", force: :cascade do |t|
@@ -73,14 +75,16 @@ ActiveRecord::Schema.define(version: 20150501230917) do
   end
 
   create_table "relojes", force: :cascade do |t|
-    t.string   "marca",        limit: 25,                                     null: false
-    t.string   "modelo",       limit: 25,                                     null: false
-    t.text     "descripcion",                                                 null: false
-    t.decimal  "precio",                  precision: 8, scale: 2,             null: false
-    t.integer  "proveedor_id",                                                null: false
-    t.datetime "created_at",                                                  null: false
-    t.datetime "updated_at",                                                  null: false
+    t.string   "marca",        limit: 25,                                        null: false
+    t.string   "modelo",       limit: 25,                                        null: false
+    t.text     "descripcion",                                                    null: false
+    t.decimal  "precio",                  precision: 8, scale: 2,                null: false
+    t.integer  "proveedor_id",                                                   null: false
+    t.datetime "created_at",                                                     null: false
+    t.datetime "updated_at",                                                     null: false
     t.integer  "stock",                                           default: 0
+    t.decimal  "costo",                   precision: 8, scale: 2, default: 0.0,  null: false
+    t.boolean  "activo",                                          default: true
   end
 
   create_table "repartidores", force: :cascade do |t|

@@ -18,12 +18,11 @@ class Pedido < ActiveRecord::Base
 	end
 
 	def self.compras_dia
-		data = {}
-		Pedido.all.map do |p|
-			fecha = p.created_at.to_date
-			data.has_key?(fecha) ? data[fecha] += p.total : data[fecha] = p.total
-		end
-		data
+		select("total").group_by_day(:fecha_pedido, last: 30 ).sum("total")
+	end
+
+	def self.compras_mes
+		select("total").group_by_month(:fecha_pedido, last: 12).sum("total")
 	end
 
 	def self.compras_proveedor
