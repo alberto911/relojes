@@ -5,7 +5,7 @@
 	<div class="col-lg-12"> 
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				Utilidades por día 
+				Utilidades diarias en los últimos 30 días
 			</div>                       
 			<div class="panel-body">
 			<%= area_chart Orden.utilidades_dia %>
@@ -16,7 +16,18 @@
 	<div class="col-lg-12"> 
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				Ventas por día 
+				Utilidades mensuales en el último año 
+			</div>                       
+			<div class="panel-body">
+			<%= area_chart Orden.utilidades_mes %>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-12"> 
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Ventas diarias en los últimos 30 días 
 			</div>                       
 			<div class="panel-body">
 			<%= area_chart Orden.ventas_dia %>
@@ -27,6 +38,17 @@
 	<div class="col-lg-12"> 
 		<div class="panel panel-default">
 			<div class="panel-heading">
+				Ventas mensuales en el último año 
+			</div>                       
+			<div class="panel-body">
+			<%= area_chart Orden.ventas_mes %>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-6"> 
+		<div class="panel panel-default">
+			<div class="panel-heading">
 				Ventas por proveedor 
 			</div>                       
 			<div class="panel-body">
@@ -35,7 +57,7 @@
 		</div>
 	</div>
 
-	<div class="col-lg-12"> 
+	<div class="col-lg-6"> 
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				Ventas por vendedor 

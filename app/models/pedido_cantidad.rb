@@ -6,6 +6,6 @@ class PedidoCantidad < ActiveRecord::Base
   validates :cantidad, numericality: { only_integer: true, greater_than: 0}
 
 	def subtotal 
-		reloj.precio * cantidad
+		reloj.costo * cantidad
 	end
 end

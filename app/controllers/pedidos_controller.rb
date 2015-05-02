@@ -59,6 +59,7 @@ class PedidosController < ApplicationController
 	def place
 		unless @pedido.pedidos_cantidades.empty?
 			@pedido.update(fecha_pedido: Time.now)
+			@pedido.update(total: @pedido.total)
 			redirect_to @pedido, notice: 'El pedido fue completado exitosamente.'
 		else
 			redirect_to @pedido, alert: 'No hay productos en el pedido.'

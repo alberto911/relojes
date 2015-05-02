@@ -5,11 +5,12 @@ class Reloj < ActiveRecord::Base
   has_many :pedidos_cantidades
   has_many :pedidos, through: :pedidos_cantidades
 	
-	validates :marca, :modelo, :descripcion, :precio, :proveedor_id, presence: { message: "no puede estar vacío" }
+	validates :marca, :modelo, :descripcion, :precio, :proveedor_id, :costo, presence: { message: "no puede estar vacío" }
 	validates :modelo, uniqueness: true
 	validates :marca, :modelo, length: { maximum: 25 }
   validates :descripcion, length: { maximum: 100 }
   validates :precio, format: { with: /\A\d{1,6}(?:\.\d{0,2})?\z/, message: "debe tener máximo 6 dígitos enteros y 2 decimales" }
+	validates :costo, format: { with: /\A\d{1,6}(?:\.\d{0,2})?\z/, message: "debe tener máximo 6 dígitos enteros y 2 decimales" }
 
 	def self.por_marca
 	  joins("join proveedores p on relojes.proveedor_id = p.id").group("p.nombre").count

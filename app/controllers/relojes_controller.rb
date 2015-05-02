@@ -76,6 +76,6 @@ class RelojesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reloj_params
-      params.require(:reloj).permit(:marca, :modelo, :descripcion, :precio, :proveedor_id)
+      params.require(:reloj).permit(:marca, :modelo, :descripcion, :precio, :proveedor_id, :costo)
     end
 end

@@ -39,13 +39,21 @@ class Orden < ActiveRecord::Base
 		utilidades				
 	end	
 
-	def self.ventas_dia
-		data = {}
-		Orden.all.map do |o|
-			fecha = o.created_at.to_date
-			data.has_key?(fecha) ? data[fecha] += o.total : data[fecha] = o.total
+	def self.utilidades_mes
+		utilidades = self.ventas_mes
+		compras = Pedido.compras_mes
+		compras.map do |c|
+			utilidades.has_key?(c.first) ? utilidades[c.first] -= c.second : utilidades[c.first] = -c.second
 		end
-		data
+		utilidades				
+	end	
+
+	def self.ventas_dia
+		select("total").group_by_day(:fecha_pedido, last: 30).sum("total")
+	end
+
+	def self.ventas_mes
+		select("total").group_by_month(:fecha_pedido, last: 12).sum("total")
 	end
 	
 	def self.ventas_proveedor

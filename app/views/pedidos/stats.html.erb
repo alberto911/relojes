@@ -4,7 +4,7 @@
 	<div class="col-lg-12"> 
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				Compras por día 
+				Compras diarias en los últimos 30 días 
 			</div>                       
 			<div class="panel-body">
 			<%= area_chart(Pedido.compras_dia) %>
@@ -13,6 +13,17 @@
 	</div>
 
 	<div class="col-lg-12"> 
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Compras mensuales en el último año
+			</div>                       
+			<div class="panel-body">
+			<%= area_chart(Pedido.compras_mes) %>
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-lg-6"> 
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				Compras por proveedor 
