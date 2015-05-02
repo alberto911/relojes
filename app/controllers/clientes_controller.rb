@@ -34,7 +34,7 @@ class ClientesController < ApplicationController
 
     respond_to do |format|
       if @cliente.save
-        format.html { redirect_to @cliente, notice: 'Cliente was successfully created.' }
+        format.html { redirect_to @cliente, notice: 'El cliente se creó exitosamente.' }
         format.json { render :show, status: :created, location: @cliente }
       else
         format.html { render :new }
@@ -47,8 +47,12 @@ class ClientesController < ApplicationController
   # PATCH/PUT /clientes/1.json
   def update
     respond_to do |format|
-      if @cliente.update(cliente_params)
-        format.html { redirect_to @cliente, notice: 'Cliente was successfully updated.' }
+			@cliente.attributes = cliente_params
+			if @cliente.vendedor_id_changed?
+				@cliente.fecha_asignacion = Time.now
+			end
+      if @cliente.save
+        format.html { redirect_to @cliente, notice: 'El cliente se actualizó exitosamente.' }
         format.json { render :show, status: :ok, location: @cliente }
       else
         format.html { render :edit }
@@ -60,10 +64,13 @@ class ClientesController < ApplicationController
   # DELETE /clientes/1
   # DELETE /clientes/1.json
   def destroy
-    @cliente.destroy
-    respond_to do |format|
-      format.html { redirect_to clientes_url, notice: 'Cliente was successfully destroyed.' }
-      format.json { head :no_content }
+		if Orden.por_cliente(@cliente).empty?
+    	@cliente.destroy
+      redirect_to clientes_url, notice: 'El cliente se borró exitosamente.'
+    else
+			@cliente.update(activo: false)
+			@cliente.tiendas_clientes.update_all("activo = false")
+			redirect_to clientes_url, notice: 'El cliente se ha desactivado.'
     end
   end
 

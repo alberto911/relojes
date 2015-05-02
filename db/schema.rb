@@ -11,19 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150502051012) do
+ActiveRecord::Schema.define(version: 20150502205505) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "clientes", force: :cascade do |t|
-    t.string   "nombre",           limit: 50, null: false
-    t.string   "telefono",         limit: 10, null: false
-    t.string   "direccion_fiscal", limit: 50, null: false
-    t.string   "rfc",              limit: 13, null: false
-    t.integer  "vendedor_id",                 null: false
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.string   "nombre",           limit: 50,                null: false
+    t.string   "telefono",         limit: 10,                null: false
+    t.string   "direccion_fiscal", limit: 50,                null: false
+    t.string   "rfc",              limit: 13,                null: false
+    t.integer  "vendedor_id",                                null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.boolean  "activo",                      default: true
+    t.datetime "fecha_asignacion"
   end
 
   create_table "ordenes", force: :cascade do |t|
@@ -66,12 +68,13 @@ ActiveRecord::Schema.define(version: 20150502051012) do
   add_index "pedidos_cantidades", ["pedido_id", "reloj_id"], name: "index_pedidos_cantidades_on_pedido_id_and_reloj_id", unique: true, using: :btree
 
   create_table "proveedores", force: :cascade do |t|
-    t.string   "nombre",     null: false
-    t.string   "telefono",   null: false
-    t.string   "direccion",  null: false
-    t.string   "rfc",        null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "nombre",                    null: false
+    t.string   "telefono",                  null: false
+    t.string   "direccion",                 null: false
+    t.string   "rfc",                       null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.boolean  "activo",     default: true
   end
 
   create_table "relojes", force: :cascade do |t|
@@ -98,12 +101,13 @@ ActiveRecord::Schema.define(version: 20150502051012) do
   end
 
   create_table "tiendas_clientes", force: :cascade do |t|
-    t.string   "nombre",     limit: 50, null: false
-    t.string   "direccion",  limit: 50, null: false
-    t.string   "telefono",   limit: 10, null: false
-    t.integer  "cliente_id",            null: false
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.string   "nombre",     limit: 50,                null: false
+    t.string   "direccion",  limit: 50,                null: false
+    t.string   "telefono",   limit: 10,                null: false
+    t.integer  "cliente_id",                           null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.boolean  "activo",                default: true
   end
 
   create_table "users", force: :cascade do |t|

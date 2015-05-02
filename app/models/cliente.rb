@@ -8,7 +8,13 @@ class Cliente < ActiveRecord::Base
   validates :telefono, length: { in: 8..10 }, numericality: true
   validates :rfc, length: { is: 13 }
 
+	default_scope { where(activo: true) }
+
 	def self.con_tiendas
 		Cliente.joins(:tiendas_clientes).distinct.order('nombre asc')
+	end
+	
+	def tiendas_unscoped
+		TiendaCliente.unscoped.where(cliente_id: id)
 	end
 end

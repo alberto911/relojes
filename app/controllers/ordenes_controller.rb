@@ -83,8 +83,8 @@ class OrdenesController < ApplicationController
 
   def place
 		unless @orden.ordenes_cantidades.empty?
-			@orden.update(fecha_pedido: Time.now)
 			@orden.update(total: @orden.total)
+			@orden.update(fecha_pedido: Time.now)
 			redirect_to @orden, notice: 'La orden fue completada exitosamente.'
 		else
 			redirect_to @orden, alert: 'No hay productos en la orden.'

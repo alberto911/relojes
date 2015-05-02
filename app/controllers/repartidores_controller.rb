@@ -35,7 +35,7 @@ class RepartidoresController < ApplicationController
 			if user.save
 		    @repartidor.user_id = user.id
 				  if @repartidor.save
-				    redirect_to @repartidor, notice: 'Repartidor was successfully created.'
+				    redirect_to @repartidor, notice: 'El repartidor se creó exitosamente.'
 				  else
 				    render :new
 				  end
@@ -52,7 +52,7 @@ class RepartidoresController < ApplicationController
     user = User.find(@repartidor.user_id)
     if @repartidor.update(repartidor_params) && user.update(user_params)
 			sign_in(current_user, :bypass => true)
-      redirect_to @repartidor, notice: 'Repartidor was successfully updated.'
+      redirect_to @repartidor, notice: 'El repartidor se actualizó exitosamente.'
     else
 			flash[:alert] = user.errors.full_messages.first
       render :edit
@@ -64,7 +64,7 @@ class RepartidoresController < ApplicationController
   def destroy
     @repartidor.destroy
     respond_to do |format|
-      format.html { redirect_to repartidores_url, notice: 'Repartidor was successfully destroyed.' }
+      format.html { redirect_to repartidores_url, notice: 'El repartidor se borró exitosamente.' }
       format.json { head :no_content }
     end
   end

@@ -33,7 +33,7 @@ class PedidosController < ApplicationController
 
     respond_to do |format|
       if @pedido.save
-        format.html { redirect_to @pedido, notice: 'Pedido was successfully created.' }
+        format.html { redirect_to @pedido, notice: 'El pedido se creó exitosamente.' }
         format.json { render :show, status: :created, location: @pedido }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class PedidosController < ApplicationController
 		unless @pedido.fecha_pedido    
 			@pedido.destroy
 		  respond_to do |format|
-		    format.html { redirect_to pedidos_url, notice: 'Pedido was successfully destroyed.' }
+		    format.html { redirect_to pedidos_url, notice: 'El pedido se borró exitosamente.' }
 		    format.json { head :no_content }
 		  end
 		else		
@@ -58,8 +58,8 @@ class PedidosController < ApplicationController
 
 	def place
 		unless @pedido.pedidos_cantidades.empty?
-			@pedido.update(fecha_pedido: Time.now)
 			@pedido.update(total: @pedido.total)
+			@pedido.update(fecha_pedido: Time.now)
 			redirect_to @pedido, notice: 'El pedido fue completado exitosamente.'
 		else
 			redirect_to @pedido, alert: 'No hay productos en el pedido.'

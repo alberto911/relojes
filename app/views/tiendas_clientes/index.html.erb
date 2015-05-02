@@ -29,5 +29,6 @@
 </div>
 
 <% if current_user.is_admin %>
-<%= link_to 'Nueva tienda', new_cliente_tienda_cliente_path(@cliente), role: "button", class: "btn btn-outline btn-primary" %><br>
+<%= link_to 'Nueva tienda', new_cliente_tienda_cliente_path(@cliente), role: "button", class: "btn btn-default" %>
+<%= link_to 'Regresar', clientes_path, role: "button", class: "btn btn-default" %><br>
 <% end %>
