@@ -35,7 +35,7 @@ class RelojesController < ApplicationController
 
     respond_to do |format|
       if @reloj.save
-        format.html { redirect_to @reloj, notice: 'Reloj was successfully created.' }
+        format.html { redirect_to @reloj, notice: 'El reloj se creó exitosamente.' }
         format.json { render :show, status: :created, location: @reloj }
       else
         format.html { render :new }
@@ -49,7 +49,7 @@ class RelojesController < ApplicationController
   def update
     respond_to do |format|
       if @reloj.update(reloj_params)
-        format.html { redirect_to @reloj, notice: 'Reloj was successfully updated.' }
+        format.html { redirect_to @reloj, notice: 'El reloj se actualizó exitosamente.' }
         format.json { render :show, status: :ok, location: @reloj }
       else
         format.html { render :edit }
@@ -61,10 +61,11 @@ class RelojesController < ApplicationController
   # DELETE /relojes/1
   # DELETE /relojes/1.json
   def destroy
-    @reloj.destroy
-    respond_to do |format|
-      format.html { redirect_to relojes_url, notice: 'Reloj was successfully destroyed.' }
-      format.json { head :no_content }
+    if @reloj.destroy
+      redirect_to relojes_url, notice: 'El reloj se borró exitosamente.'
+    else
+			@reloj.update(activo: false)
+			redirect_to relojes_url, notice: 'El reloj se ha desactivado.'
     end
   end
 

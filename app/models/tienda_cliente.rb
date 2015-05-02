@@ -6,6 +6,12 @@ class TiendaCliente < ActiveRecord::Base
 	validates :nombre, :direccion, length: { maximum: 50 }
   validates :telefono, length: { in: 8..10 }, numericality: true
 
+	default_scope { where(activo: true) }
+
+	def cliente
+		Cliente.unscoped.where(id: cliente_id).first
+	end
+
 	def self.por_vendedor(vendedor_id)
 		TiendaCliente.joins(:cliente).where("clientes.vendedor_id = ?", vendedor_id)
 	end

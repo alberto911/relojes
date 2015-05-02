@@ -6,6 +6,14 @@ class Orden < ActiveRecord::Base
 
 	validates :tienda_cliente_id, presence: true
 
+	def tienda_cliente
+		TiendaCliente.unscoped.where(id: tienda_cliente_id).first
+	end
+
+	def self.por_cliente(cliente)
+		self.where("tienda_cliente_id IN (?)", cliente.tiendas_unscoped.select(:id))
+	end
+
 	def self.por_vendedor(vendedor_id)
 		Orden.joins("JOIN tiendas_clientes tc ON tc.id = ordenes.tienda_cliente_id JOIN clientes c ON c.id = tc.cliente_id").where("c.vendedor_id = ?", vendedor_id)
 	end
@@ -15,11 +23,15 @@ class Orden < ActiveRecord::Base
   end
 
 	def total
-	  	total = 0
-		ordenes_cantidades.each do |oc|
-			total += oc.subtotal
+		if fecha_pedido
+			read_attribute(:total)
+		else	  
+			total = 0
+			ordenes_cantidades.each do |oc|
+				total += oc.subtotal
+			end
+			total
 		end
-		total
 	end
 
 	def entregada?
@@ -27,6 +39,7 @@ class Orden < ActiveRecord::Base
   end
 
 	def tiene_repartidor?
+		
 		!repartidor.nil?
 	end
 	

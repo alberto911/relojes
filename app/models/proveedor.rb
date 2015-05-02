@@ -8,6 +8,8 @@ class Proveedor < ActiveRecord::Base
   validates :telefono, length: { in: 8..10 }, numericality: true
   validates :rfc, length: { is: 13 }
 
+	default_scope { where(activo: true) }
+
 	def self.con_relojes
 		Proveedor.joins(:relojes).distinct.order('nombre asc')
   end

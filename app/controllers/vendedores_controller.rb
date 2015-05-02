@@ -36,7 +36,7 @@ class VendedoresController < ApplicationController
 			if user.save
 		    @vendedor.user_id = user.id
 				  if @vendedor.save
-				    redirect_to @vendedor, notice: 'Vendedor was successfully created.'
+				    redirect_to @vendedor, notice: 'El vendedor se creó exitosamente.'
 				  else
 				    render :new
 				  end
@@ -53,7 +53,7 @@ class VendedoresController < ApplicationController
 		user = User.find(@vendedor.user_id)
     if @vendedor.update(vendedor_params) && user.update(user_params)
 			sign_in(current_user, :bypass => true)
-      redirect_to @vendedor, notice: 'Vendedor was successfully updated.'
+      redirect_to @vendedor, notice: 'El vendedor se actualizó exitosamente.'
     else
 			flash[:alert] = user.errors.full_messages.first
       render :edit
@@ -64,7 +64,7 @@ class VendedoresController < ApplicationController
   # DELETE /vendedores/1.json
   def destroy
 		if @vendedor.destroy
-    	redirect_to vendedores_url, notice: 'Vendedor was successfully destroyed.'
+    	redirect_to vendedores_url, notice: 'El vendedor se borró exitosamente.'
 		else
 			flash[:alert] = @vendedor.errors.full_messages.first
 			redirect_to :action => :index

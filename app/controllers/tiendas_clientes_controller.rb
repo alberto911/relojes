@@ -39,7 +39,7 @@ class TiendasClientesController < ApplicationController
 
     respond_to do |format|
       if @tienda_cliente.save
-        format.html { redirect_to @tienda_cliente, notice: 'Tienda was successfully created.' }
+        format.html { redirect_to @tienda_cliente, notice: 'La tienda se creó exitosamente.' }
         format.json { render :show, status: :created, location: @tienda_cliente }
       else
         format.html { render :new }
@@ -53,7 +53,7 @@ class TiendasClientesController < ApplicationController
   def update
     respond_to do |format|
       if @tienda_cliente.update(tienda_cliente_params)
-        format.html { redirect_to @tienda_cliente, notice: 'Tienda was successfully updated.' }
+        format.html { redirect_to @tienda_cliente, notice: 'La tienda se actualizó exitosamente.' }
         format.json { render :show, status: :ok, location: @tienda_cliente }
       else
         format.html { render :edit }
@@ -65,13 +65,13 @@ class TiendasClientesController < ApplicationController
   # DELETE /tiendas_clientes/1
   # DELETE /tiendas_clientes/1.json
   def destroy
-		cliente = @tienda_cliente.cliente    
-		@tienda_cliente.destroy
-    respond_to do |format|
-			format.js
-      format.html { redirect_to cliente_tiendas_clientes_url(cliente), notice: 'Tienda was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+		cliente = @tienda_cliente.cliente  
+		if @tienda_cliente.destroy
+      redirect_to cliente_tiendas_clientes_url(cliente), notice: 'La tienda se borró exitosamente.'
+    else
+			@tienda_cliente.update(activo: false)
+			redirect_to cliente_tiendas_clientes_url(cliente), notice: 'La tienda se ha desactivado.'
+		end
   end
 
   private

@@ -5,16 +5,24 @@ class Pedido < ActiveRecord::Base
 
 	validates :proveedor_id, presence: true
 
+	def proveedor
+		Proveedor.unscoped.where(id: proveedor_id).first
+	end
+
 	def recibido?
 		!fecha_entrega.nil?
 	end
 
 	def total
-	  	total = 0
-		pedidos_cantidades.each do |pc|
-			total += pc.subtotal
+		if fecha_pedido
+			read_attribute(:total)
+		else
+			total = 0
+			pedidos_cantidades.each do |pc|
+				total += pc.subtotal
+			end
+			total
 		end
-		total
 	end
 
 	def self.compras_dia
