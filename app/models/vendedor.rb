@@ -7,4 +7,5 @@ class Vendedor < ActiveRecord::Base
 	validates :nombre, length: { maximum: 50 }
   validates :telefono, length: { in: 8..10 }, numericality: true
   validates :rfc, length: { is: 13 }
+
 end

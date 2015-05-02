@@ -95,4 +95,31 @@ class Orden < ActiveRecord::Base
 		final
 	end
 
+	def self.ventas_cliente
+		joins("join tiendas_clientes tc on ordenes.tienda_cliente_id = tc.id join clientes c on tc.cliente_id = c.id ").group("c.nombre").sum("total")
+	end
+
+	def self.ventas_dia_vendedor(u)
+		joins("join tiendas_clientes tc on ordenes.tienda_cliente_id = tc.id join clientes c on tc.cliente_id = c.id ").where("c.vendedor_id = ?", u).group_by_day(:fecha_pedido, last: 30).sum("total")
+	end
+
+	def self.ventas_mes_vendedor(u)
+		joins("join tiendas_clientes tc on ordenes.tienda_cliente_id = tc.id join clientes c on tc.cliente_id = c.id ").where("c.vendedor_id = ?", u).group_by_month(:fecha_pedido, last: 12).sum("total")
+	end
+
+	def self.ventas_cliente_vendedor(u)
+		joins("join tiendas_clientes tc on ordenes.tienda_cliente_id = tc.id join clientes c on tc.cliente_id = c.id ").where("c.vendedor_id = ?", u).group("c.nombre").sum("total")
+	end
+
+	def self.repartos_dia(u)
+		where("ordenes.fecha_entrega IS NOT NULL AND repartidor_id = ?", u).group_by_day(:fecha_entrega, format: "%d-%m-%y", last: 30).count
+	end
+
+	def self.repartos_mes(u)
+		where("ordenes.fecha_entrega IS NOT NULL AND repartidor_id = ?", u).group_by_month(:fecha_entrega, format: "%m-%y", last: 12).count
+	end
+
+	def self.repartos_cliente(u)
+		joins("join tiendas_clientes tc on ordenes.tienda_cliente_id = tc.id join clientes c on tc.cliente_id = c.id ").where("ordenes.fecha_entrega IS NOT NULL AND repartidor_id = ?", u).group("c.nombre").count
+	end
 end

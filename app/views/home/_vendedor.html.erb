@@ -1,0 +1,55 @@
+<div class="row">
+	<div class="col-lg-4">
+		<div class="panel panel-primary">	
+        	<div class="panel-heading">
+            	<%=current_user.vendedor.nombre %>
+            </div>
+            <div class="panel-body">
+         		<p>
+			  		<strong>Número de clientes:</strong>
+			  		<%=Cliente.where("vendedor_id = ?", current_user.vendedor.id).count  %>
+				</p>
+				<p>
+			  		<strong>Ventas:</strong>
+			 		<%=Orden.joins("join tiendas_clientes tc on ordenes.tienda_cliente_id = tc.id join clientes c on tc.cliente_id = c.id ").where("c.vendedor_id = ?", current_user.vendedor.id).sum("total")  %>
+				</p>
+            </div>
+    	</div>
+	</div>
+</div>
+
+<div class = row>
+	<div class="col-lg-12"> 
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Mis ventas en los últimos 30 días
+			</div>                       
+			<div class="panel-body">
+			<%= area_chart Orden.ventas_dia_vendedor (current_user.vendedor.id) %>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-12"> 
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Mis ventas en el último año 
+			</div>                       
+			<div class="panel-body">
+			<%= area_chart Orden.ventas_mes_vendedor (current_user.vendedor.id) %>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-12"> 
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Mis ventas por cliente
+			</div>                       
+			<div class="panel-body">
+			<%= pie_chart Orden.ventas_cliente_vendedor (current_user.vendedor.id) %>
+			</div>
+		</div>
+	</div>
+
+</div>

@@ -20,5 +20,45 @@
 		</div>
 	</div>
 </div>
-<%= link_to 'Editar', edit_repartidor_path(@repartidor), class: "btn btn-default" %> 
-<%= link_to 'Regresar', repartidores_path, class: "btn btn-default" %>
+<div class= row>
+	<div class="col-lg-12"> 
+		<%= link_to 'Editar', edit_repartidor_path(@repartidor), class: "btn btn-default" %> 
+		<%= link_to 'Regresar', repartidores_path, class: "btn btn-default" %>
+	</div>
+</div>
+
+<div class = row>
+	<p></p>
+	<div class="col-lg-12"> 
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Entregas en los últimos 30 días
+			</div>                       
+			<div class="panel-body">
+			<%= column_chart Orden.repartos_dia (@repartidor.id) %>
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-lg-12"> 
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Entregas en el último año
+			</div>                       
+			<div class="panel-body">
+			<%= column_chart Orden.repartos_mes (@repartidor.id) %>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-12"> 
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Entregas por cliente
+			</div>                       
+			<div class="panel-body">
+			<%= pie_chart Orden.repartos_cliente (@repartidor.id) %>
+			</div>
+		</div>
+	</div>
+</div>
