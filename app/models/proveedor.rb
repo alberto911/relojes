@@ -7,4 +7,8 @@ class Proveedor < ActiveRecord::Base
 	validates :nombre, :direccion, length: { maximum: 50 }
   validates :telefono, length: { in: 8..10 }, numericality: true
   validates :rfc, length: { is: 13 }
+
+	def self.con_relojes
+		Proveedor.joins(:relojes).distinct.order('nombre asc')
+  end
 end

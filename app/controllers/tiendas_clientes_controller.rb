@@ -1,17 +1,26 @@
 class TiendasClientesController < ApplicationController
+  before_action :ensure_admin!, except: [:index, :show]
+  before_action :ensure_vendedor!, only: [:index, :show]
   before_action :set_tienda_cliente, only: [:show, :edit, :update, :destroy]
   before_action :set_cliente, only: [:index, :new, :create]
 
   # GET /tiendas_clientes
   # GET /tiendas_clientes.json
   def index
-    @tiendas_clientes = @cliente.tiendas_clientes
-    render layout: "dataTables"
+		unless current_user.tiene_permiso_sobre? @cliente
+			redirect_to clientes_url, alert: 'No tienes los permisos necesarios.'
+		else
+		  @tiendas_clientes = @cliente.tiendas_clientes
+		  render layout: "dataTables"
+    end
   end
 
   # GET /tiendas_clientes/1
   # GET /tiendas_clientes/1.json
   def show
+		unless current_user.tiene_permiso_sobre? @tienda_cliente.cliente
+			redirect_to clientes_url, alert: 'No tienes los permisos necesarios para ver esa tienda.'
+		end
   end
 
   # GET /tiendas_clientes/new

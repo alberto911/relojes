@@ -2,7 +2,7 @@ class PedidosCantidadesController < ApplicationController
   before_action :ensure_admin!
   before_action :set_pedido_cantidad, only: [:edit, :update, :destroy]
   before_action :set_pedido
-  before_action :verificar_no_recibido, only: [:new, :create, :edit, :update, :destroy]
+  before_action :ensure_not_placed, only: [:new, :create, :edit, :update, :destroy]
   respond_to :html, :js
 
   # GET /pedidos_cantidades
@@ -69,9 +69,9 @@ class PedidosCantidadesController < ApplicationController
   end
 
   private
-		def verificar_no_recibido
-			if @pedido.recibido?
-				redirect_to pedido_url(@pedido), alert: 'No se puede alterar un pedido que ya ha sido recibido.'
+		def ensure_not_placed
+			if @pedido.fecha_pedido
+				redirect_to pedido_url(@pedido), alert: 'No se puede alterar un pedido que ya ha sido completado.'
 			end
 		end 
 		

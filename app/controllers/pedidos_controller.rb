@@ -1,6 +1,6 @@
 class PedidosController < ApplicationController
   before_action :ensure_admin!
-  before_action :set_pedido, only: [:show, :edit, :update, :destroy, :recibir]
+  before_action :set_pedido, only: [:show, :edit, :update, :destroy, :recibir, :place]
 
   # GET /pedidos
   # GET /pedidos.json
@@ -45,27 +45,40 @@ class PedidosController < ApplicationController
   # DELETE /pedidos/1
   # DELETE /pedidos/1.json
   def destroy
-		unless @pedido.recibido?    
+		unless @pedido.fecha_pedido    
 			@pedido.destroy
 		  respond_to do |format|
 		    format.html { redirect_to pedidos_url, notice: 'Pedido was successfully destroyed.' }
 		    format.json { head :no_content }
 		  end
 		else		
-			redirect_to :back, alert: 'No se puede borrar un pedido que ya ha sido recibido.'
+			redirect_to :back, alert: 'No se puede borrar un pedido que ya ha sido enviado.'
     end
   end
 
-  def recibir
-		@pedido.transaction do
-			@pedido.update(fecha_entrega: Time.now)
-			cantidades = @pedido.pedidos_cantidades
-			@pedido.relojes.each do |reloj|
-				reloj.stock += cantidades.where(reloj_id: reloj.id).first.cantidad
-				reloj.save
-			end
+	def place
+		unless @pedido.pedidos_cantidades.empty?
+			@pedido.update(fecha_pedido: Time.now)
+			redirect_to @pedido, notice: 'El pedido fue completado exitosamente.'
+		else
+			redirect_to @pedido, alert: 'No hay productos en el pedido.'
 		end
-		redirect_to :back, notice: 'El pedido fue recibido exitosamente.'
+	end
+
+  def recibir
+		if @pedido.fecha_pedido
+			@pedido.transaction do
+				@pedido.update(fecha_entrega: Time.now)
+				cantidades = @pedido.pedidos_cantidades
+				@pedido.relojes.each do |reloj|
+					reloj.stock += cantidades.where(reloj_id: reloj.id).first.cantidad
+					reloj.save
+				end
+			end
+			redirect_to :back, notice: 'El pedido fue recibido exitosamente.'
+		else
+			redirect_to pedidos_url, alert: 'El pedido no ha sido completado.'
+		end
 	end
 
   private

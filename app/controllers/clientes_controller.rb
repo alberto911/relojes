@@ -1,16 +1,21 @@
 class ClientesController < ApplicationController
+  before_action :ensure_admin!, except: [:index, :show]
+	before_action :ensure_vendedor!, only: [:index, :show]
   before_action :set_cliente, only: [:show, :edit, :update, :destroy]
 
   # GET /clientes
   # GET /clientes.json
   def index
-    @clientes = Cliente.all
+    @clientes = current_user.vendedor ? current_user.vendedor.clientes : Cliente.all
     render layout: "dataTables"
   end
 
   # GET /clientes/1
   # GET /clientes/1.json
   def show
+		unless current_user.tiene_permiso_sobre? @cliente
+			redirect_to clientes_url, alert: 'No tienes los permisos necesarios para ver ese cliente.'
+		end
   end
 
   # GET /clientes/new

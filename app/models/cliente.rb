@@ -7,4 +7,8 @@ class Cliente < ActiveRecord::Base
 	validates :nombre, :direccion_fiscal, length: { maximum: 50 }
   validates :telefono, length: { in: 8..10 }, numericality: true
   validates :rfc, length: { is: 13 }
+
+	def self.con_tiendas
+		Cliente.joins(:tiendas_clientes).distinct.order('nombre asc')
+	end
 end

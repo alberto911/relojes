@@ -1,4 +1,5 @@
 class VendedoresController < ApplicationController
+  before_action :ensure_admin!
   before_action :set_vendedor, only: [:show, :edit, :update, :destroy]
 
   # GET /vendedores

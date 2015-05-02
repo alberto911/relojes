@@ -7,7 +7,7 @@
 				<th>Modelo</th>
 				<th>Cantidad</th>
 				<th>Subtotal</th>
-				<% unless @pedido.recibido? %>
+				<% unless @pedido.fecha_pedido %>
 					<th></th>
 				<% end %>
 			</tr>
