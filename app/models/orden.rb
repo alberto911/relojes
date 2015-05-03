@@ -102,8 +102,10 @@ class Orden < ActiveRecord::Base
 		data = {}
 		final = {}
 		Orden.all.map do |o|
-			vendedor = o.tienda_cliente.cliente.vendedor.id
-			data.has_key?(vendedor) ? data[vendedor] += o.total : data[vendedor] = o.total				
+			if o.fecha_pedido >= o.tienda_cliente.cliente.fecha_asignacion
+				vendedor = o.tienda_cliente.cliente.vendedor.id
+				data.has_key?(vendedor) ? data[vendedor] += o.total : data[vendedor] = o.total
+			end				
 		end
 		data.map do |d|
 			final[Vendedor.find(d.first).nombre] = d.second
@@ -116,15 +118,16 @@ class Orden < ActiveRecord::Base
 	end
 
 	def self.ventas_dia_vendedor(u)
-		joins("join tiendas_clientes tc on ordenes.tienda_cliente_id = tc.id join clientes c on tc.cliente_id = c.id ").where("c.vendedor_id = ?", u).group_by_day(:fecha_pedido, last: 30).sum("total")
+			joins("join tiendas_clientes tc on ordenes.tienda_cliente_id = tc.id join clientes c on tc.cliente_id = c.id ").where("c.fecha_asignacion < ordenes.fecha_pedido and c.vendedor_id = ?", u).group_by_day(:fecha_pedido, last: 30).sum("total")
+
 	end
 
 	def self.ventas_mes_vendedor(u)
-		joins("join tiendas_clientes tc on ordenes.tienda_cliente_id = tc.id join clientes c on tc.cliente_id = c.id ").where("c.vendedor_id = ?", u).group_by_month(:fecha_pedido, last: 12).sum("total")
+		joins("join tiendas_clientes tc on ordenes.tienda_cliente_id = tc.id join clientes c on tc.cliente_id = c.id ").where("c.fecha_asignacion < ordenes.fecha_pedido and c.vendedor_id = ?", u).group_by_month(:fecha_pedido, last: 12).sum("total")
 	end
 
 	def self.ventas_cliente_vendedor(u)
-		joins("join tiendas_clientes tc on ordenes.tienda_cliente_id = tc.id join clientes c on tc.cliente_id = c.id ").where("c.vendedor_id = ?", u).group("c.nombre").sum("total")
+		joins("join tiendas_clientes tc on ordenes.tienda_cliente_id = tc.id join clientes c on tc.cliente_id = c.id ").where("c.fecha_asignacion < ordenes.fecha_pedido and c.vendedor_id = ?", u).group("c.nombre").sum("total")
 	end
 
 	def self.repartos_dia(u)

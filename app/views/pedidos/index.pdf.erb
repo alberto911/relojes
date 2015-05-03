@@ -1,0 +1,33 @@
+<h2 class="page-header">Pedidos</h2>
+<div class="dataTable_wrapper">
+	<table id="dataTable" class="table table-striped table-bordered table-hover" width="100%" cellspacing="0">
+  		<thead>
+			<tr>
+			 <th>Proveedor</th>
+		    <th>Fecha pedido</th>
+		    <th>Fecha recibido</th>
+			<th>Total</th>	
+			</tr>
+  		</thead>
+
+  		<tbody>
+    		<% @pedidos.each do |pedido| %>
+      	<tr>
+					<td><%= pedido.proveedor.nombre %></td>
+		      		<td><%= pedido.fecha_pedido %></td>
+		      		<td>
+						<% if pedido.recibido? %>	
+							<%= pedido.fecha_entrega %>
+						<% end %>
+					</td>
+					<td><%= pedido.total %></td>
+      	</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
+<p></p>
+<div align = "right">
+	<strong>Compras totales:</strong>
+	<%= Pedido.sum("total") %>
+</div>

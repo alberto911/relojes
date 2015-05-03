@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150502205505) do
+ActiveRecord::Schema.define(version: 20150502223801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,12 +29,12 @@ ActiveRecord::Schema.define(version: 20150502205505) do
   end
 
   create_table "ordenes", force: :cascade do |t|
-    t.date     "fecha_entrega"
+    t.datetime "fecha_entrega"
     t.integer  "tienda_cliente_id",                          null: false
     t.integer  "repartidor_id"
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
-    t.date     "fecha_pedido"
+    t.datetime "fecha_pedido"
     t.decimal  "total",             precision: 11, scale: 2
   end
 
@@ -49,11 +49,11 @@ ActiveRecord::Schema.define(version: 20150502205505) do
   add_index "ordenes_cantidades", ["orden_id", "reloj_id"], name: "index_ordenes_cantidades_on_orden_id_and_reloj_id", unique: true, using: :btree
 
   create_table "pedidos", force: :cascade do |t|
-    t.date     "fecha_entrega"
+    t.datetime "fecha_entrega"
     t.integer  "proveedor_id",                           null: false
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
-    t.date     "fecha_pedido"
+    t.datetime "fecha_pedido"
     t.decimal  "total",         precision: 11, scale: 2
   end
 
