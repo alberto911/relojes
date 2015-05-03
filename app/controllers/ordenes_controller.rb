@@ -11,18 +11,33 @@ class OrdenesController < ApplicationController
   # GET /ordenes.json
   def index
     @ordenes = @vendedor ? Orden.por_vendedor(@vendedor.id) : Orden.all
-		render layout: "dataTables"
+
+	respond_to do |format|
+		format.html { render layout: "dataTables" }
+		format.pdf do
+			render pdf: 'ordenes',                  # file name
+			layout: 'layouts/application.pdf.erb',  # layout used
+			show_as_html: params[:debug].present?    # allow debuging
+		end
+    end
   end
 
   def stats
-		render layout: "dataTables"
+	respond_to do |format|
+		format.html { render layout: "dataTables" }
+		format.pdf do
+			render pdf: 'ordenes',                 # file name
+			layout: 'layouts/application.pdf.erb',  # layout used
+			show_as_html: params[:debug].present?    # allow debuging
+		end
+    end
   end
 
   # GET /ordenes/1
   # GET /ordenes/1.json
   def show
-		@ordenes_cantidades = @orden.ordenes_cantidades
-		render layout: "dataTables"
+	@ordenes_cantidades = @orden.ordenes_cantidades
+	render layout: "dataTables"
   end
 
   # GET /ordenes/new

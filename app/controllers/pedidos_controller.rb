@@ -6,7 +6,15 @@ class PedidosController < ApplicationController
   # GET /pedidos.json
   def index
     @pedidos = Pedido.all
-		render layout: "dataTables"
+
+		respond_to do |format|
+		format.html { render layout: "dataTables" }
+		format.pdf do
+			render pdf: 'pedidos',                  # file name
+			layout: 'layouts/application.pdf.erb',  # layout used
+			show_as_html: params[:debug].present?    # allow debuging
+		end
+    end
   end
   
   def stats
