@@ -10,6 +10,23 @@ class Orden < ActiveRecord::Base
 		TiendaCliente.unscoped.where(id: tienda_cliente_id).first
 	end
 
+	def self.por_entregar(repartidor_id)
+		self.where("fecha_entrega IS NULL AND repartidor_id = ?", repartidor_id).map do |orden|
+			orden.tienda_cliente.direccion
+		end
+  end
+
+	def self.por_repartidor
+		tiendas = []		
+		self.where("fecha_entrega IS NULL AND repartidor_id IS NOT NULL").map do |orden|
+			h = {}			
+			h[:id] = orden.repartidor_id
+			h[:direccion] =  orden.tienda_cliente.direccion
+			tiendas.push(h)
+		end
+		tiendas
+	end
+
 	def self.por_cliente(cliente)
 		self.where("tienda_cliente_id IN (?)", cliente.tiendas_unscoped.select(:id))
 	end
@@ -39,7 +56,6 @@ class Orden < ActiveRecord::Base
   end
 
 	def tiene_repartidor?
-		
 		!repartidor.nil?
 	end
 	

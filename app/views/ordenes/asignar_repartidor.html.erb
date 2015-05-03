@@ -1,14 +1,89 @@
 <h2 class="page-header">Asignar repartidor</h2>
 
-<%= form_for(@orden, url: update_repartidor_path) do |f| %>
-	<div class="col-lg-6">
-		<div class="form-group">
-		  <label>Repartidor</label><br>
-		  <%= f.collection_select(:repartidor_id, @repartidores, :id, :nombre, {prompt: "Selecciona"}, {class: "form-control"}) %>
+<div class="row">
+	<%= form_for(@orden, url: update_repartidor_path) do |f| %>
+		<div class="col-lg-6">
+			<div class="form-group">
+				<label>Repartidor</label><br>
+				<%= f.collection_select(:repartidor_id, @repartidores, :id, :nombre, {prompt: "Selecciona"}, {class: "form-control", id: "repartidor_select"}) %>
+			</div>
+			<div class="actions">
+				<%= f.submit 'Enviar', class: "btn btn-default" %>
+				<%= link_to 'Cancelar', ordenes_path,  class: "btn btn-default" %> 	
+			</div>
 		</div>
-		<div class="actions">
-		  <%= f.submit 'Enviar', class: "btn btn-default" %>
-			<%= link_to 'Cancelar', ordenes_path,  class: "btn btn-default" %> 	
-		</div>
-	</div>
-<% end %>
+	<% end %>
+</div>
+
+<div id="map-container">
+  <div id="map-canvas"></div>
+</div> <p></p>
+
+<script>
+	var markers = [];
+
+	function initialize() {	
+		var mapOptions = {
+      center: new google.maps.LatLng(19.426958, -99.167869),
+      zoom: 13,
+      mapTypeId: google.maps.MapTypeId.NORMAL,
+      panControl: true,
+      scaleControl: false,
+      streetViewControl: true,
+      overviewMapControl: true
+    };
+    // initializing map
+    map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
+
+		var geocoding  = new google.maps.Geocoder();
+		var tienda = <%= @orden.tienda_cliente.to_json.html_safe %>;
+		codeAddress(geocoding, tienda);
+
+		$('#repartidor_select').change(function() {
+			deleteMarkers();
+      var id = $('#repartidor_select').val();
+			var tiendas = <%= Orden.por_repartidor.to_json.html_safe %>;
+		  for (var i = 0; i < tiendas.length; i++) {
+				if (tiendas[i].id == id)
+					codeAddress(geocoding, tiendas[i]);
+			}
+		});
+	}
+
+	function codeAddress(geocoding, tienda){
+		var address = tienda.direccion;
+		if(address.length > 0){
+		  geocoding.geocode({'address': address},function(results, status){
+		    if(status == google.maps.GeocoderStatus.OK){
+		      map.setCenter(results[0].geometry.location);
+		      var marker  =  new google.maps.Marker({
+		        map: map,
+		        position: results[0].geometry.location
+		      });
+					if (markers.length == 0)
+					  marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');	
+					markers.push(marker);
+		      }else{
+		      alert("Geocode was not successful for the following reason: " + status);
+		    }
+		  });
+		}else{
+		  alert("Search field can't be blank");
+		}
+  }
+
+	// Sets the map on all markers in the array.
+	function setAllMap(map) {
+		for (var i = 1; i < markers.length; i++) {
+		  markers[i].setMap(map);
+		}
+  }
+
+	// Deletes all markers in the array by removing references to them.
+	function deleteMarkers() {
+  	setAllMap(null);
+ 	  var actual = markers[0];
+		markers = [];
+		markers[0] = actual;
+  }
+</script>
