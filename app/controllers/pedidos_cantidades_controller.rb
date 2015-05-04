@@ -29,32 +29,32 @@ class PedidosCantidadesController < ApplicationController
 		@pedidos_cantidades = @pedido.pedidos_cantidades
     @pedido_cantidad = @pedidos_cantidades.create(pedido_cantidad_params)
 
-    #respond_to do |format|
-      #if @pedido_cantidad.save
-        #format.html { redirect_to @pedido_cantidad, notice: 'Pedido cantidad was successfully created.' }
-        #format.json { render :show, status: :created, location: @pedido_cantidad }
-      #else
-        #format.html { render :new }
-        #format.json { render json: @pedido_cantidad.errors, status: :unprocessable_entity }
-      #end
-    #end
+    respond_to do |format|
+      if @pedido_cantidad.save
+        format.html { redirect_to @pedido, notice: 'El producto se agregó exitosamente.' }
+				format.js
+      else
+        format.html { render :new }
+        format.js
+      end
+    end
   end
 
   # PATCH/PUT /pedidos_cantidades/1
   # PATCH/PUT /pedidos_cantidades/1.json
   def update
 		@pedidos_cantidades = @pedido.pedidos_cantidades
-		@pedido_cantidad.update_attributes(pedido_cantidad_params)
+		@pedido_cantidad.update_attributes(update_params)
 
-    #respond_to do |format|
-      #if @pedido_cantidad.update(pedido_cantidad_params)
-        #format.html { redirect_to @pedido_cantidad, notice: 'Pedido cantidad was successfully updated.' }
-        #format.json { render :show, status: :ok, location: @pedido_cantidad }
-      #else
-        #format.html { render :edit }
-        #format.json { render json: @pedido_cantidad.errors, status: :unprocessable_entity }
-      #end
-    #end
+    respond_to do |format|
+      if @pedido_cantidad.update(update_params)
+        format.html { redirect_to @pedido, notice: 'El producto se actualizó exitosamente.' }
+        format.js
+      else
+        format.html { render :edit }
+        format.js
+      end
+    end
   end
 
   # DELETE /pedidos_cantidades/1
@@ -62,10 +62,10 @@ class PedidosCantidadesController < ApplicationController
   def destroy
 		@pedidos_cantidades = @pedido.pedidos_cantidades
     @pedido_cantidad.destroy
-    #respond_to do |format|
-      #format.html { redirect_to pedido_pedidos_cantidades_url(params[:pedido_id]), notice: 'Pedido cantidad was successfully destroyed.' }
-      #format.json { head :no_content }
-    #end
+    respond_to do |format|
+      format.html { redirect_to @pedido, notice: 'El producto se borró exitosamente.' }
+			format.js
+    end
   end
 
   private
@@ -87,5 +87,9 @@ class PedidosCantidadesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def pedido_cantidad_params
       params.require(:pedido_cantidad).permit(:cantidad, :reloj_id)
+    end
+
+		def update_params
+      params.require(:pedido_cantidad).permit(:cantidad)
     end
 end

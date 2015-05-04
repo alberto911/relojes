@@ -25,7 +25,7 @@
 		      <td><%= link_to "<span class=\"glyphicon glyphicon-info-sign\"></span>".html_safe, cliente %>
 					<% if current_user.is_admin %>
 		      	<%= link_to "<span class=\"glyphicon glyphicon-pencil\"></span>".html_safe, edit_cliente_path(cliente) %>
-		      	<%= link_to "<span class=\"glyphicon glyphicon-remove\"></span>".html_safe, cliente, method: :delete, data: { confirm: 'Are you sure?' } %>
+		      	<%= link_to "<span class=\"glyphicon glyphicon-remove\"></span>".html_safe, cliente, method: :delete, data: { confirm: '¿Estás seguro?' } %>
 					<% end %>
 					</td>
 		    </tr>
@@ -37,3 +37,4 @@
 <% if current_user.is_admin %>
 	<%= link_to 'Nuevo Cliente', new_cliente_path, class: "btn btn-default" %>
 <% end %>
+<%= link_to 'Exportar CSV', clientes_path(format: :csv), class: "btn btn-default" %>

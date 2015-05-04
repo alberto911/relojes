@@ -4,7 +4,7 @@ class OrdenesController < ApplicationController
   before_action :ensure_repartidor!, only: :entregar
   before_action :validar_permisos, only: [:show, :edit, :update, :destroy, :place]
 	before_action :ensure_not_placed, only: [:edit, :update, :destroy]
-  before_action :set_vendedor, only: [:index, :new, :edit]
+  before_action :set_vendedor, only: [:index, :new, :create, :edit]
   before_action :set_orden, only: [:asignar_repartidor, :update_repartidor, :entregar]
 
   # GET /ordenes
@@ -12,14 +12,15 @@ class OrdenesController < ApplicationController
   def index
     @ordenes = @vendedor ? Orden.por_vendedor(@vendedor.id) : Orden.all
 
-	respond_to do |format|
-		format.html { render layout: "dataTables" }
-		format.pdf do
-			render pdf: 'ordenes',                  # file name
-			layout: 'layouts/application.pdf.erb',  # layout used
-			show_as_html: params[:debug].present?    # allow debuging
+		respond_to do |format|
+			format.html { render layout: "dataTables" }
+			format.csv { send_data @ordenes.to_csv }
+			format.pdf do
+				render pdf: 'ordenes',                  # file name
+				layout: 'layouts/application.pdf.erb',  # layout used
+				show_as_html: params[:debug].present?    # allow debuging
+			end
 		end
-    end
   end
 
   def stats
@@ -27,6 +28,7 @@ class OrdenesController < ApplicationController
 		format.html { render layout: "dataTables" }
 		format.pdf do
 			render pdf: 'ordenes',                 # file name
+			javascript_delay: 2000,
 			layout: 'layouts/application.pdf.erb',  # layout used
 			show_as_html: params[:debug].present?    # allow debuging
 		end
@@ -36,8 +38,11 @@ class OrdenesController < ApplicationController
   # GET /ordenes/1
   # GET /ordenes/1.json
   def show
-	@ordenes_cantidades = @orden.ordenes_cantidades
-	render layout: "dataTables"
+		@ordenes_cantidades = @orden.ordenes_cantidades
+		respond_to do |format|
+			format.html { render layout: "dataTables" }
+			format.pdf { render pdf: 'orden', layout: 'layouts/application.pdf.erb' }
+		end
   end
 
   # GET /ordenes/new
@@ -55,6 +60,7 @@ class OrdenesController < ApplicationController
   # POST /ordenes.json
   def create
     @orden = Orden.new(orden_params)
+		set_options_for_selects(@vendedor)
 
     respond_to do |format|
       if current_user.tiene_permiso_sobre?(@orden) && @orden.save
@@ -93,7 +99,7 @@ class OrdenesController < ApplicationController
 
 	def update_tiendas
 		cliente = Cliente.find(params[:cliente_id])
-		@tiendas_clientes = cliente.tiendas_clientes.map{|t| [t.nombre, t.id]}.insert(0, "Selecciona una tienda")
+		@tiendas_clientes = cliente.tiendas_clientes.map{|t| [t.nombre, t.id]}
 	end
 
   def place
@@ -116,7 +122,7 @@ class OrdenesController < ApplicationController
 
 	def update_repartidor
 		permitted = params.require(:orden).permit(:repartidor_id)
-		if permitted[:repartidor_id].nil?
+		if permitted[:repartidor_id].blank?
 			redirect_to :asignar_repartidor, alert: 'El repartidor no puede estar vacío.'
 		elsif @orden.fecha_pedido && !@orden.entregada?
       @orden.update(permitted)

@@ -7,7 +7,11 @@ class ClientesController < ApplicationController
   # GET /clientes.json
   def index
     @clientes = current_user.vendedor ? current_user.vendedor.clientes : Cliente.all
-    render layout: "dataTables"
+
+		respond_to do |format|
+      format.html { render layout: "dataTables" }
+			format.csv { send_data @clientes.to_csv }
+    end
   end
 
   # GET /clientes/1

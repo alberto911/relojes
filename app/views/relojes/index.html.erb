@@ -20,13 +20,13 @@
         			<td><%= reloj.proveedor.nombre %></td>
 					<td><%= reloj.marca %></td>
         			<td><%= reloj.modelo %></td>
-					<td><%= reloj.costo %></td>
-        			<td><%= reloj.precio %></td>
+					<td><%= number_to_currency(reloj.costo) %></td>
+        			<td><%= number_to_currency(reloj.precio) %></td>
 					<td><%= reloj.stock %></td>
         			<td><%= link_to "<span class=\"glyphicon glyphicon-info-sign\"></span>".html_safe, reloj %>
 							<% if current_user.is_admin %>
 		     				<%= link_to "<span class=\"glyphicon glyphicon-pencil\"></span>".html_safe, edit_reloj_path(reloj) %>
-		     				<%= link_to "<span class=\"glyphicon glyphicon-remove\"></span>".html_safe, reloj, method: :delete, data: { confirm: 'Are you sure?' } %>
+		     				<%= link_to "<span class=\"glyphicon glyphicon-remove\"></span>".html_safe, reloj, method: :delete, data: { confirm: '¿Estás seguro?' } %>
 							<% end %>
 							</td>
      			</tr>
@@ -38,3 +38,4 @@
 <% if current_user.is_admin %>
 <%= link_to 'Nuevo Reloj', new_reloj_path, class: "btn btn-default" %>
 <% end %>
+<%= link_to 'Exportar a CSV', relojes_path(format: :csv), class: "btn btn-default" %>

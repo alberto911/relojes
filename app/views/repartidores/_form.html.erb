@@ -1,7 +1,7 @@
 <%= form_for(@repartidor) do |f| %>
   <% if @repartidor.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@repartidor.errors.count, "error") %> prohibited this repartidor from being saved:</h2>
+      <h4>Hay <%= pluralize(@repartidor.errors.count, "error") %>:</h4>
 
       <ul>
       <% @repartidor.errors.full_messages.each do |message| %>

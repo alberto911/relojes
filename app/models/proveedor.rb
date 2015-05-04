@@ -10,6 +10,15 @@ class Proveedor < ActiveRecord::Base
 
 	default_scope { where(activo: true) }
 
+	def self.to_csv
+		CSV.generate do |csv|
+		  csv << ['id', 'nombre', 'teléfono', 'dirección', 'RFC']
+		  all.each do |prov|
+				csv << [prov.id, prov.nombre, prov.telefono, prov.direccion, prov.rfc]
+		  end
+  	end
+	end
+
 	def self.con_relojes
 		Proveedor.joins(:relojes).distinct.order('nombre asc')
   end

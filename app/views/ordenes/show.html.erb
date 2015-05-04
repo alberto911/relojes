@@ -16,21 +16,23 @@
 				</p>
 			<% end %>
 
+			<% if @orden.fecha_pedido %>
 			<p>
 				<strong>Fecha pedido:</strong>
-				<%= @orden.fecha_pedido %>
+				<%= @orden.fecha_pedido.strftime("%d-%m-%Y %H:%M") %>
 			</p>
+			<% end %>
 
 			<% if @orden.entregada? %>
 			<p>
 				<strong>Fecha entrega:</strong>
-				<%= @orden.fecha_entrega %>
+				<%= @orden.fecha_entrega.strftime("%d-%m-%Y %H:%M") %>
 			</p>
 			<% end %>
 
 			<p>
 				<strong>Total:</strong>
-				<div id="total"><%= @orden.total %></div>
+				<div id="total"><%= number_to_currency(@orden.total) %></div>
 			</p>
 		</div>
 
@@ -52,6 +54,8 @@
 			<% end %>
 			<%= link_to 'Completar orden', place_orden_path(@orden), class: "btn btn-default" %>
 		</div>
+		<% else %>
+			<%= link_to 'Exportar a PDF', orden_path(@orden, format: 'pdf'), class: "btn btn-default" %>
 		<% end %>
 
 	</div>

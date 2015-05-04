@@ -8,24 +8,40 @@ class PedidosController < ApplicationController
     @pedidos = Pedido.all
 
 		respond_to do |format|
-		format.html { render layout: "dataTables" }
-		format.pdf do
-			render pdf: 'pedidos',                  # file name
-			layout: 'layouts/application.pdf.erb',  # layout used
-			show_as_html: params[:debug].present?    # allow debuging
-		end
+			format.html { render layout: "dataTables" }
+			format.csv { send_data @pedidos.to_csv }
+			format.pdf do
+				render pdf: 'pedidos',                  # file name
+				layout: 'layouts/application.pdf.erb',  # layout used
+				show_as_html: params[:debug].present?    # allow debuging
+			end
     end
   end
   
   def stats
-		render layout: "dataTables"
+		respond_to do |format|
+			format.html { render layout: "dataTables" }
+			format.pdf do
+				render pdf: 'pedidos',                 # file name
+				javascript_delay: 2000,
+				layout: 'layouts/application.pdf.erb',  # layout used
+				show_as_html: params[:debug].present?    # allow debuging
+			end
+		end
   end
 
   # GET /pedidos/1
   # GET /pedidos/1.json
   def show
 		@pedidos_cantidades = @pedido.pedidos_cantidades
-		render layout: "dataTables"
+		respond_to do |format|
+			format.html { render layout: "dataTables" }
+			format.pdf do
+				render pdf: 'pedido',                 # file name
+				layout: 'layouts/application.pdf.erb',  # layout used
+				show_as_html: params[:debug].present?    # allow debuging
+			end
+		end
   end
 
   # GET /pedidos/new
@@ -38,6 +54,7 @@ class PedidosController < ApplicationController
   # POST /pedidos.json
   def create
     @pedido = Pedido.new(pedido_params)
+		@proveedores = Proveedor.joins(:relojes).distinct.order('nombre asc')
 
     respond_to do |format|
       if @pedido.save

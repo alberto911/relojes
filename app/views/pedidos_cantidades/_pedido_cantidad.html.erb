@@ -2,9 +2,9 @@
 	<td><%= pedido_cantidad.reloj.marca %></td>
 	<td><%= pedido_cantidad.reloj.modelo %></td>
 	<td><%= pedido_cantidad.cantidad %></td>
-	<td><%= pedido_cantidad.subtotal %></td>
+	<td><%= number_to_currency(pedido_cantidad.subtotal) %></td>
 	<% unless @pedido.fecha_pedido %>
 		<td><%= link_to "<span class=\"glyphicon glyphicon-pencil\"></span>".html_safe, edit_pedido_pedido_cantidad_path(@pedido, pedido_cantidad), remote: true %>
-		<%= link_to "<span class=\"glyphicon glyphicon-remove\"></span>".html_safe, [@pedido, pedido_cantidad], remote: true, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		<%= link_to "<span class=\"glyphicon glyphicon-remove\"></span>".html_safe, [@pedido, pedido_cantidad], remote: true, method: :delete, data: { confirm: '¿Estás seguro?' } %></td>
 	<% end %>
 </tr>

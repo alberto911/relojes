@@ -10,6 +10,15 @@ class Cliente < ActiveRecord::Base
 
 	default_scope { where(activo: true) }
 
+	def self.to_csv
+		CSV.generate do |csv|
+		  csv << ['id', 'nombre', 'teléfono', 'dirección fiscal', 'RFC', 'responsable']
+		  all.each do |cliente|
+				csv << [cliente.id, cliente.nombre, cliente.telefono, cliente.direccion_fiscal, cliente.rfc, cliente.vendedor.nombre]
+		  end
+  	end
+	end
+
 	def self.con_tiendas
 		Cliente.joins(:tiendas_clientes).distinct.order('nombre asc')
 	end

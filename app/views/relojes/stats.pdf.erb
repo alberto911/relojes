@@ -1,14 +1,35 @@
-<h2 class="page-header">Estadísticas de compras</h2>
-<a href="/pedidos/stats.pdf" data-method="get" class='btn btn-default'>Exportar a PDF</a>
+<h2 class="page-header">Estadísticas de relojes</h2>
+
 <div class = row>
-	<p></p>
 	<div class="col-lg-12"> 
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				Compras diarias en los últimos 30 días 
+				Relojes por proveedor
 			</div>                       
 			<div class="panel-body">
-			<%= area_chart(Pedido.compras_dia) %>
+			<%= pie_chart Reloj.por_marca %>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-6"> 
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Promedio de precio por proveedor
+			</div>                       
+			<div class="panel-body">
+			<%= column_chart Reloj.precios %>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-6"> 
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Stock por proveedor
+			</div>                       
+			<div class="panel-body">
+			<%= column_chart Reloj.stock_proveedor %>
 			</div>
 		</div>
 	</div>
@@ -16,21 +37,10 @@
 	<div class="col-lg-12"> 
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				Compras mensuales en el último año
+				Relojes por rango de precio
 			</div>                       
 			<div class="panel-body">
-			<%= area_chart(Pedido.compras_mes) %>
-			</div>
-		</div>
-	</div>
-	
-	<div class="col-lg-6"> 
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				Compras por proveedor 
-			</div>                       
-			<div class="panel-body">
-			<%= column_chart(Pedido.compras_proveedor) %>
+			<%= pie_chart(Reloj.rangos_precio)%>
 			</div>
 		</div>
 	</div>

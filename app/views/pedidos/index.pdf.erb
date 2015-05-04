@@ -14,13 +14,13 @@
     		<% @pedidos.each do |pedido| %>
       	<tr>
 					<td><%= pedido.proveedor.nombre %></td>
-		      		<td><%= pedido.fecha_pedido %></td>
+		      		<td><%= pedido.fecha_pedido.strftime("%d-%m-%Y %H:%M") if pedido.fecha_pedido %></td>
 		      		<td>
 						<% if pedido.recibido? %>	
-							<%= pedido.fecha_entrega %>
+							<%= pedido.fecha_entrega.strftime("%d-%m-%Y %H:%M") %>
 						<% end %>
 					</td>
-					<td><%= pedido.total %></td>
+					<td><%= number_to_currency(pedido.total) %></td>
       	</tr>
 			<% end %>
 		</tbody>
@@ -29,5 +29,5 @@
 <p></p>
 <div align = "right">
 	<strong>Compras totales:</strong>
-	<%= Pedido.sum("total") %>
+	<%= number_to_currency(Pedido.sum("total")) %>
 </div>

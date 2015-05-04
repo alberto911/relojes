@@ -21,10 +21,12 @@
 		      <td><%= proveedor.rfc %></td>
 		      <td><%= link_to "<span class=\"glyphicon glyphicon-info-sign\"></span>".html_safe, proveedor %>
 		      <%= link_to "<span class=\"glyphicon glyphicon-pencil\"></span>".html_safe, edit_proveedor_path(proveedor) %>
-		      <%= link_to "<span class=\"glyphicon glyphicon-remove\"></span>".html_safe, proveedor, method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+		      <%= link_to "<span class=\"glyphicon glyphicon-remove\"></span>".html_safe, proveedor, method: :delete, data: { confirm: '¿Estás seguro?' } %> </td>
 		    </tr>
 		  <% end %>
 		</tbody>
 	</table>
 </div>
+
 <%= link_to 'Nuevo Proveedor', new_proveedor_path, class: "btn btn-default" %>
+<%= link_to 'Exportar a CSV', proveedores_path(format: :csv), class: "btn btn-default" %>

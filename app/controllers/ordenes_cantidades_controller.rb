@@ -22,32 +22,32 @@ class OrdenesCantidadesController < ApplicationController
 		@ordenes_cantidades = @orden.ordenes_cantidades
     @orden_cantidad = @ordenes_cantidades.create(orden_cantidad_params)
 
-    #respond_to do |format|
-      #if @orden_cantidad.save
-        #format.html { redirect_to @orden_cantidad, notice: 'Orden cantidad was successfully created.' }
-        #format.json { render :show, status: :created, location: @orden_cantidad }
-      #else
-        #format.html { render :new }
-        #format.json { render json: @orden_cantidad.errors, status: :unprocessable_entity }
-      #end
-    #end
+    respond_to do |format|
+      if @orden_cantidad.save
+        format.html { redirect_to @orden, notice: 'El producto se agregó exitosamente.' }
+				format.js
+      else
+        format.html { render :new }
+        format.js
+      end
+    end
   end
 
   # PATCH/PUT /ordenes_cantidades/1
   # PATCH/PUT /ordenes_cantidades/1.json
   def update
 		@ordenes_cantidades = @orden.ordenes_cantidades
-		@orden_cantidad.update_attributes(orden_cantidad_params)
+		@orden_cantidad.update_attributes(update_params)
 
-    #respond_to do |format|
-      #if @orden_cantidad.update(orden_cantidad_params)
-        #format.html { redirect_to @orden_cantidad, notice: 'Orden cantidad was successfully updated.' }
-        #format.json { render :show, status: :ok, location: @orden_cantidad }
-      #else
-        #format.html { render :edit }
-        #format.json { render json: @orden_cantidad.errors, status: :unprocessable_entity }
-      #end
-    #end
+    respond_to do |format|
+      if @orden_cantidad.update(update_params)
+        format.html { redirect_to @orden, notice: 'El producto se actualizó exitosamente.' }
+        format.js
+      else
+        format.html { render :edit }
+        format.js
+      end
+    end
   end
 
   # DELETE /ordenes_cantidades/1
@@ -55,10 +55,10 @@ class OrdenesCantidadesController < ApplicationController
   def destroy
 		@ordenes_cantidades = @orden.ordenes_cantidades
     @orden_cantidad.destroy
-    #respond_to do |format|
-      #format.html { redirect_to orden_ordenes_cantidades_url(params[:orden_id]), notice: 'Orden cantidad was successfully destroyed.' }
-      #format.json { head :no_content }
-    #end
+    respond_to do |format|
+      format.html { redirect_to @orden, notice: 'El producto se borró exitosamente.' }
+			format.js
+    end
   end
 
 	def update_relojes
@@ -95,4 +95,8 @@ class OrdenesCantidadesController < ApplicationController
     def orden_cantidad_params
       params.require(:orden_cantidad).permit(:cantidad, :reloj_id)
     end
+
+		def update_params
+			params.require(:orden_cantidad).permit(:cantidad)
+		end
 end

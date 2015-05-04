@@ -11,18 +11,18 @@
             <div class="panel-body">
          		<p>
 			  		<strong>Ventas totales:</strong>
-			  		<%=Orden.sum("total") %>
+			  		<%= number_to_currency(Orden.sum("total")) %>
 				</p>
 
 				<p>
 			  		<strong> Compras totales:</strong>
-			  		<%=Pedido.sum("total") %>
+			  		<%= number_to_currency(Pedido.sum("total")) %>
 				</p>
             </div>
             <div class="panel-footer">
             	<p>
 			  		<strong>Utilidad:</strong>
-			 		<%=Orden.sum("total") - Pedido.sum("total") %>
+			 		<%= number_to_currency(Orden.sum("total") - Pedido.sum("total")) %>
 				</p>
         	</div>
     	</div>

@@ -1,0 +1,11 @@
+<% if @orden_cantidad.errors.any? %>
+  <div id="error_explanation">
+    <h5>Hay <%= pluralize(@orden_cantidad.errors.count, "error") %>:</h5>
+
+    <ul>
+    <% @orden_cantidad.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>

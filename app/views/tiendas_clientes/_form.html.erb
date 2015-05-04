@@ -1,7 +1,7 @@
 <%= form_for([@cliente, @tienda_cliente]) do |f| %>
   <% if @tienda_cliente.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@tienda_cliente.errors.count, "error") %> prohibited this tienda from being saved:</h2>
+      <h4>Hay <%= pluralize(@tienda_cliente.errors.count, "error") %>:</h4>
 
       <ul>
       <% @tienda_cliente.errors.full_messages.each do |message| %>

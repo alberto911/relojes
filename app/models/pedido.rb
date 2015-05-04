@@ -5,6 +5,15 @@ class Pedido < ActiveRecord::Base
 
 	validates :proveedor_id, presence: true
 
+	def self.to_csv
+		CSV.generate do |csv|
+		  csv << ['id', 'proveedor', 'fecha_pedido', 'fecha_recibido', 'total']
+		  all.each do |pedido|
+				csv << [pedido.id, pedido.proveedor.nombre, pedido.fecha_pedido, pedido.fecha_entrega, pedido.total]
+		  end
+  	end
+	end
+
 	def proveedor
 		Proveedor.unscoped.where(id: proveedor_id).first
 	end

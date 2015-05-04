@@ -6,8 +6,24 @@ class Orden < ActiveRecord::Base
 
 	validates :tienda_cliente_id, presence: true
 
+	def self.to_csv
+		CSV.generate do |csv|
+		  csv << ['id', 'cliente', 'tienda', 'fecha_pedido', 'fecha_entrega', 'repartidor', 'total']
+		  all.each do |orden|
+				valores = [orden.id, orden.tienda_cliente.cliente.nombre, orden.tienda_cliente.nombre, orden.fecha_pedido, orden.fecha_entrega]
+				orden.repartidor ? valores.push(orden.repartidor.nombre) : valores.push(nil)
+		    valores.push(orden.total)
+				csv << valores
+		  end
+  	end
+	end
+
 	def tienda_cliente
 		TiendaCliente.unscoped.where(id: tienda_cliente_id).first
+	end
+
+	def self.ventas_por_vendedor(vendedor)
+    self.joins("join tiendas_clientes tc on ordenes.tienda_cliente_id = tc.id join clientes c on tc.cliente_id = c.id ").where("c.vendedor_id = ?", vendedor.id).sum("total")
 	end
 
 	def self.por_entregar(repartidor_id)
@@ -101,7 +117,7 @@ class Orden < ActiveRecord::Base
 	def self.ventas_vendedor
 		data = {}
 		final = {}
-		Orden.all.map do |o|
+		Orden.where("fecha_pedido IS NOT NULL").map do |o|
 			if o.fecha_pedido >= o.tienda_cliente.cliente.fecha_asignacion
 				vendedor = o.tienda_cliente.cliente.vendedor.id
 				data.has_key?(vendedor) ? data[vendedor] += o.total : data[vendedor] = o.total

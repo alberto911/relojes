@@ -11,7 +11,7 @@
 				</p>
 				<p>
 			  		<strong>Ventas:</strong>
-			 		<%=Orden.joins("join tiendas_clientes tc on ordenes.tienda_cliente_id = tc.id join clientes c on tc.cliente_id = c.id ").where("c.vendedor_id = ?", current_user.vendedor.id).sum("total")  %>
+			 		<%= number_to_currency(Orden.ventas_por_vendedor(current_user.vendedor))  %>
 				</p>
             </div>
     	</div>

@@ -1,0 +1,51 @@
+<div class="row">
+	<p></p>
+	<div class="col-lg-4">
+		<div class="well well-lg">
+			<h4><%= @pedido.proveedor.nombre %></h4>
+		
+			<% if @pedido.fecha_pedido %>			
+				<p>
+					<strong>Fecha pedido:</strong>
+					<%= @pedido.fecha_pedido.strftime("%d-%m-%Y %H:%M") %>
+				</p>
+			<% end %>
+		
+			<% if @pedido.recibido? %>
+				<p>
+					<strong>Fecha recibido:</strong>
+					<%= @pedido.fecha_entrega.strftime("%d-%m-%Y %H:%M") %>
+				</p>
+			<% end %>
+
+			<p>
+				<strong>Total:</strong>
+				<div id="total"><%= number_to_currency(@pedido.total) %></div>
+			</p>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<h3>Productos</h3>
+	<table class="table table-striped table-bordered table-hover" width="100%" cellspacing="0">
+		<thead>
+			<tr>
+				<th>Línea</th>
+				<th>Modelo</th>
+				<th>Cantidad</th>
+				<th>Subtotal</th>
+			</tr>
+		</thead>
+		<tbody id="cantidades">
+			<% @pedidos_cantidades.each do |pedido_cantidad| %>
+				<tr>
+					<td><%= pedido_cantidad.reloj.marca %></td>
+					<td><%= pedido_cantidad.reloj.modelo %></td>
+					<td><%= pedido_cantidad.cantidad %></td>
+					<td><%= number_to_currency(pedido_cantidad.subtotal) %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	<table>
+</div>

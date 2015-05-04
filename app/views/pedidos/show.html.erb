@@ -4,25 +4,30 @@
 		<div class="well well-lg">
 			<h4><%= @pedido.proveedor.nombre %></h4>
 		
-			<p>
-				<strong>Fecha pedido:</strong>
-				<%= @pedido.fecha_pedido %>
-			</p>
+			<% if @pedido.fecha_pedido %>			
+				<p>
+					<strong>Fecha pedido:</strong>
+					<%= @pedido.fecha_pedido.strftime("%d-%m-%Y %H:%M") %>
+				</p>
+			<% end %>
 		
 			<% if @pedido.recibido? %>
 				<p>
 					<strong>Fecha recibido:</strong>
-					<%= @pedido.fecha_entrega %>
+					<%= @pedido.fecha_entrega.strftime("%d-%m-%Y %H:%M") %>
 				</p>
 			<% end %>
 
 			<p>
 				<strong>Total:</strong>
-				<div id="total"><%= @pedido.total %></div>
+				<div id="total"><%= number_to_currency(@pedido.total) %></div>
 			</p>
 		</div>
 			
 		<%= link_to 'Regresar', pedidos_path, class: "btn btn-default" %>
+		<% if @pedido.fecha_pedido %>
+			<%= link_to 'Exportar a PDF', pedido_path(@pedido, format: 'pdf'), class: "btn btn-default" %>
+		<% end %>
 	</div>
 		
 

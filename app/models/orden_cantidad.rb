@@ -39,17 +39,20 @@ class OrdenCantidad < ActiveRecord::Base
 		end
 
 		def decrease_stock
-			reloj.stock -= cantidad
-			reloj.save
+			r = reloj
+			r.stock -= cantidad
+			r.save
 		end
 
 		def update_stock
-			reloj.stock -= (cantidad - cantidad_was)
-			reloj.save
+			r = reloj
+			r.stock -= (cantidad - cantidad_was)
+			r.save
 		end
 
 		def increase_stock
-			reloj.stock += cantidad
-			reloj.save
+			r = reloj
+			r.stock += cantidad
+			r.save
 		end
 end

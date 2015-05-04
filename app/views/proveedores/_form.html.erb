@@ -1,7 +1,7 @@
 <%= form_for(@proveedor) do |f| %>
   <% if @proveedor.errors.any? %>
     <div id="error_explanation">
-      <h4><%= pluralize(@proveedor.errors.count, "error") %> prohibited this proveedor from being saved:</h4>
+      <h4>Hay <%= pluralize(@proveedor.errors.count, "error") %>:</h4>
 
       <ul>
       <% @proveedor.errors.full_messages.each do |message| %>

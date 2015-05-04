@@ -1,3 +1,6 @@
-$('#cantidades').html("<%= j (render @pedidos_cantidades) %>");
-$('#total').html("<%= j ("#{@pedido.total}") %>");
-$('#cantidad-form').slideUp(350);
+$('#errores').html('<%= j (render("errors", :formats => [:html])) %>');
+<% unless @pedido_cantidad.errors.any? %>
+	$('#cantidades').html("<%= j (render @pedidos_cantidades) %>");
+	$('#total').html("<%= j ("#{@pedido.total}") %>");
+	$('#cantidad-form').slideUp(350);
+<% end %>

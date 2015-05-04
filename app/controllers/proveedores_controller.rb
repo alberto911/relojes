@@ -6,7 +6,10 @@ class ProveedoresController < ApplicationController
   # GET /proveedores.json
   def index
     @proveedores = Proveedor.all
-		render layout: "dataTables"
+		respond_to do |format|
+      format.html { render layout: "dataTables" }
+			format.csv { send_data @proveedores.to_csv }
+    end
   end
 
   # GET /proveedores/1

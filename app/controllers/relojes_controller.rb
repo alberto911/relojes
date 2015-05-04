@@ -7,11 +7,22 @@ class RelojesController < ApplicationController
   # GET /relojes.json
   def index
     @relojes = Reloj.all
-		render layout: "dataTables"
+		respond_to do |format|
+      format.html { render layout: "dataTables" }
+			format.csv { send_data @relojes.to_csv }
+    end
   end
 
   def stats
-		render layout: "dataTables"
+		respond_to do |format|
+			format.html { render layout: "dataTables" }
+			format.pdf do
+				render pdf: 'relojes',                 # file name
+				javascript_delay: 2000,
+				layout: 'layouts/application.pdf.erb',  # layout used
+				show_as_html: params[:debug].present?    # allow debuging
+			end
+		end
   end
 
   # GET /relojes/1

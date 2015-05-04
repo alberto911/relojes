@@ -14,6 +14,15 @@ class Reloj < ActiveRecord::Base
 
 	default_scope { where(activo: true) }
 
+	def self.to_csv
+		CSV.generate do |csv|
+		  csv << ['id', 'proveedor', 'línea', 'modelo', 'costo', 'precio', 'stock']
+		  all.each do |reloj|
+				csv << [reloj.id, reloj.proveedor.nombre, reloj.marca, reloj.modelo, reloj.costo, reloj.precio, reloj.stock]
+		  end
+  	end
+	end
+
 	def self.por_marca
 	  joins("join proveedores p on relojes.proveedor_id = p.id").group("p.nombre").count
 	end

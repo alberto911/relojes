@@ -18,7 +18,7 @@
 		    	<tr>
 						<td><%= orden.tienda_cliente.cliente.nombre %></td>
 						<td><%= orden.tienda_cliente.nombre %></td>
-						<td><%= orden.fecha_pedido %></td>
+						<td><%= orden.fecha_pedido.strftime("%d-%m-%Y %H:%M") %></td>
 						<td><%= orden.tienda_cliente.direccion %></td>
 						<td><%= link_to 'Marcar entregada', entregar_orden_path(orden), class: "btn btn-success btn-sm" %></td>
 		    	</tr>
