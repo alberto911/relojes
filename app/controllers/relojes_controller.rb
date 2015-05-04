@@ -14,6 +14,11 @@ class RelojesController < ApplicationController
   end
 
   def stats
+		@por_marca = Reloj.por_marca
+		@precios = Reloj.precios
+		@stock_proveedor = Reloj.stock_proveedor
+		@rangos_precio = Reloj.rangos_precio
+
 		respond_to do |format|
 			format.html { render layout: "dataTables" }
 			format.pdf do

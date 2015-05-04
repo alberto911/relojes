@@ -28,7 +28,7 @@ gem 'chartkick'
 gem 'groupdate'
 #gem generate PDF
 gem 'wkhtmltopdf-installer'
-gem 'wicked_pdf' 
+gem 'wicked_pdf'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -14,6 +14,10 @@ class Pedido < ActiveRecord::Base
   	end
 	end
 
+	def self.suma_total
+		self.sum("total")
+	end
+
 	def proveedor
 		Proveedor.unscoped.where(id: proveedor_id).first
 	end

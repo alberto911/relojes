@@ -7,11 +7,11 @@
             <div class="panel-body">
          		<p>
 			  		<strong>Número de clientes:</strong>
-			  		<%=Cliente.where("vendedor_id = ?", current_user.vendedor.id).count  %>
+			  		<%= @count %>
 				</p>
 				<p>
 			  		<strong>Ventas:</strong>
-			 		<%= number_to_currency(Orden.ventas_por_vendedor(current_user.vendedor))  %>
+			 		<%= number_to_currency(@ventas)  %>
 				</p>
             </div>
     	</div>
@@ -25,7 +25,7 @@
 				Mis ventas en los últimos 30 días
 			</div>                       
 			<div class="panel-body">
-			<%= area_chart Orden.ventas_dia_vendedor (current_user.vendedor.id) %>
+			<%= area_chart @ventas_dia %>
 			</div>
 		</div>
 	</div>
@@ -36,7 +36,7 @@
 				Mis ventas en el último año 
 			</div>                       
 			<div class="panel-body">
-			<%= area_chart Orden.ventas_mes_vendedor (current_user.vendedor.id) %>
+			<%= area_chart @ventas_mes %>
 			</div>
 		</div>
 	</div>
@@ -47,7 +47,7 @@
 				Mis ventas por cliente
 			</div>                       
 			<div class="panel-body">
-			<%= pie_chart Orden.ventas_cliente_vendedor (current_user.vendedor.id) %>
+			<%= pie_chart @ventas_cliente %>
 			</div>
 		</div>
 	</div>

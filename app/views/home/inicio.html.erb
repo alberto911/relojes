@@ -1,10 +1,8 @@
 <h2 class="page-header">Inicio</h2>
 <% if current_user.is_admin %>
 <%= render "admin" %>
-<% end %>
-<% if current_user.vendedor %>
+<% elsif current_user.vendedor %>
 <%= render "vendedor" %>
-<% end %>
-<% if current_user.repartidor %>
+<% elsif current_user.repartidor %>
 <%= render "repartidor" %>
 <% end %>

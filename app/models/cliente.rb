@@ -19,6 +19,10 @@ class Cliente < ActiveRecord::Base
   	end
 	end
 
+	def self.count_by_vendedor(vendedor)
+		self.where("vendedor_id = ?", vendedor.id).count
+	end
+
 	def self.con_tiendas
 		Cliente.joins(:tiendas_clientes).distinct.order('nombre asc')
 	end

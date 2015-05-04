@@ -1,2 +1,2 @@
 $('#cantidades').html("<%= j (render @pedidos_cantidades) %>");
-$('#total').html("<%= j ("#{@pedido.total}") %>");
+$('#total').html("<%= j ("#{number_to_currency(@pedido.total)}") %>");

@@ -7,7 +7,7 @@
 				Compras diarias en los últimos 30 días 
 			</div>                       
 			<div class="panel-body">
-			<%= area_chart(Pedido.compras_dia) %>
+			<%= area_chart(@compras_dia) %>
 			</div>
 		</div>
 	</div>
@@ -18,7 +18,7 @@
 				Compras mensuales en el último año
 			</div>                       
 			<div class="panel-body">
-			<%= area_chart(Pedido.compras_mes) %>
+			<%= area_chart(@compras_mes) %>
 			</div>
 		</div>
 	</div>
@@ -29,7 +29,7 @@
 				Compras por proveedor 
 			</div>                       
 			<div class="panel-body">
-			<%= column_chart(Pedido.compras_proveedor) %>
+			<%= column_chart(@compras_proveedor) %>
 			</div>
 		</div>
 	</div>

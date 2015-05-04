@@ -8,8 +8,7 @@
 				Ventas diarias en los últimos 30 días 
 			</div>                       
 			<div class="panel-body">
-			<%= area_chart Orden.ventas_dia %>
-			
+			<%= area_chart @ventas_dia %>
 			</div>
 		</div>
 	</div>
@@ -20,7 +19,7 @@
 				Ventas mensuales en el último año 
 			</div>                       
 			<div class="panel-body">
-			<%= area_chart Orden.ventas_mes %>
+			<%= area_chart @ventas_mes %>
 			</div>
 		</div>
 	</div>
@@ -31,7 +30,7 @@
 				Ventas por proveedor 
 			</div>                       
 			<div class="panel-body">
-			<%= column_chart Orden.ventas_proveedor %>
+			<%= column_chart @ventas_proveedor %>
 			</div>
 		</div>
 	</div>
@@ -42,7 +41,7 @@
 				Ventas por vendedor 
 			</div>                       
 			<div class="panel-body">
-			<%= column_chart Orden.ventas_vendedor %>
+			<%= column_chart @ventas_vendedor %>
 			</div>
 		</div>
 	</div>
@@ -53,7 +52,7 @@
 				Ventas por cliente 
 			</div>                       
 			<div class="panel-body">
-			<%= pie_chart Orden.ventas_cliente %>
+			<%= pie_chart @ventas_cliente %>
 			</div>
 		</div>
 	</div>

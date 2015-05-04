@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-lg-4">
-		<% if Pedido.sum("total") > Orden.sum("total") %>
+		<% if @total_pedidos > @total_ordenes %>
     	<div class="panel panel-red">
 		<% else %>
 		<div class="panel panel-green">	
@@ -11,18 +11,18 @@
             <div class="panel-body">
          		<p>
 			  		<strong>Ventas totales:</strong>
-			  		<%= number_to_currency(Orden.sum("total")) %>
+			  		<%= number_to_currency(@total_ordenes) %>
 				</p>
 
 				<p>
 			  		<strong> Compras totales:</strong>
-			  		<%= number_to_currency(Pedido.sum("total")) %>
+			  		<%= number_to_currency(@total_pedidos) %>
 				</p>
             </div>
             <div class="panel-footer">
             	<p>
 			  		<strong>Utilidad:</strong>
-			 		<%= number_to_currency(Orden.sum("total") - Pedido.sum("total")) %>
+			 		<%= number_to_currency(@total_ordenes - @total_pedidos) %>
 				</p>
         	</div>
     	</div>
@@ -38,7 +38,7 @@
 				Utilidades diarias en los últimos 30 días
 			</div>                       
 			<div class="panel-body">
-			<%= area_chart Orden.utilidades_dia %>
+			<%= area_chart @utilidades_dia %>
 			</div>
 		</div>
 	</div>
@@ -49,7 +49,7 @@
 				Utilidades mensuales en el último año 
 			</div>                       
 			<div class="panel-body">
-			<%= area_chart Orden.utilidades_mes %>
+			<%= area_chart @utilidades_mes %>
 			</div>
 		</div>
 	</div>

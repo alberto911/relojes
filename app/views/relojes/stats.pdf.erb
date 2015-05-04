@@ -7,7 +7,7 @@
 				Relojes por proveedor
 			</div>                       
 			<div class="panel-body">
-			<%= pie_chart Reloj.por_marca %>
+			<%= pie_chart @por_marca %>
 			</div>
 		</div>
 	</div>
@@ -18,7 +18,7 @@
 				Promedio de precio por proveedor
 			</div>                       
 			<div class="panel-body">
-			<%= column_chart Reloj.precios %>
+			<%= column_chart @precios %>
 			</div>
 		</div>
 	</div>
@@ -29,7 +29,7 @@
 				Stock por proveedor
 			</div>                       
 			<div class="panel-body">
-			<%= column_chart Reloj.stock_proveedor %>
+			<%= column_chart @stock_proveedor %>
 			</div>
 		</div>
 	</div>
@@ -40,7 +40,7 @@
 				Relojes por rango de precio
 			</div>                       
 			<div class="panel-body">
-			<%= pie_chart(Reloj.rangos_precio)%>
+			<%= pie_chart(@rangos_precio)%>
 			</div>
 		</div>
 	</div>

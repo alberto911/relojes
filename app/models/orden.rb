@@ -18,6 +18,18 @@ class Orden < ActiveRecord::Base
   	end
 	end
 
+	def self.suma_total
+		self.sum("total")
+	end
+
+	def self.repartos_asignados(repartidor)
+		self.where("repartidor_id = ?", repartidor.id).count
+	end
+
+	def self.repartos_completados(repartidor)
+		self.where("ordenes.fecha_entrega IS NOT NULL AND repartidor_id = ?", repartidor.id).count
+	end
+
 	def tienda_cliente
 		TiendaCliente.unscoped.where(id: tienda_cliente_id).first
 	end

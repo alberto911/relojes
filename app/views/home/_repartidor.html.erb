@@ -6,12 +6,12 @@
             </div>
             <div class="panel-body">
          		<p>
-			  		<strong>Número de repartos aignados:</strong>
-			  		<%=Orden.where("repartidor_id = ?", current_user.repartidor.id).count  %>
+			  		<strong>Número de repartos asignados:</strong>
+			  		<%= @asignados %>
 				</p>
 				<p>
 			  		<strong>Número de repartos completados:</strong>
-			  		<%=Orden.where("ordenes.fecha_entrega IS NOT NULL AND repartidor_id = ?", current_user.repartidor.id).count  %>
+			  		<%= @completados %>
 				</p>
             </div>
     	</div>
@@ -25,7 +25,7 @@
 				Mis entregas en los últimos 30 días
 			</div>                       
 			<div class="panel-body">
-			<%= column_chart Orden.repartos_dia (current_user.repartidor.id) %>
+			<%= column_chart @repartos_dia %>
 			</div>
 		</div>
 	</div>
@@ -36,7 +36,7 @@
 				Mis entregas en el último año
 			</div>                       
 			<div class="panel-body">
-			<%= column_chart Orden.repartos_mes (current_user.repartidor.id) %>
+			<%= column_chart @repartos_mes %>
 			</div>
 		</div>
 	</div>
@@ -47,7 +47,7 @@
 				Mis entregas por cliente
 			</div>                       
 			<div class="panel-body">
-			<%= pie_chart Orden.repartos_cliente (current_user.repartidor.id) %>
+			<%= pie_chart @repartos_cliente %>
 			</div>
 		</div>
 	</div>

@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 	before_action :authenticate_user!
 
 	rescue_from ActiveRecord::RecordNotFound, with: :back_to_root
+	rescue_from ActionController::UnknownFormat, with: :back_to_root
 
 	protected
 	def ensure_admin!

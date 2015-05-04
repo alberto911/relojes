@@ -24,14 +24,20 @@ class OrdenesController < ApplicationController
   end
 
   def stats
-	respond_to do |format|
-		format.html { render layout: "dataTables" }
-		format.pdf do
-			render pdf: 'ordenes',                 # file name
-			javascript_delay: 2000,
-			layout: 'layouts/application.pdf.erb',  # layout used
-			show_as_html: params[:debug].present?    # allow debuging
-		end
+		@ventas_dia = Orden.ventas_dia
+		@ventas_mes = Orden.ventas_mes
+		@ventas_proveedor = Orden.ventas_proveedor
+		@ventas_vendedor = Orden.ventas_vendedor
+		@ventas_cliente = Orden.ventas_cliente
+
+		respond_to do |format|
+			format.html { render layout: "dataTables" }
+			format.pdf do
+				render pdf: 'ordenes',                 # file name
+				javascript_delay: 2000,
+				layout: 'layouts/application.pdf.erb',  # layout used
+				show_as_html: params[:debug].present?    # allow debuging
+			end
     end
   end
 

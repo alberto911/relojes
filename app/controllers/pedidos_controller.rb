@@ -19,6 +19,10 @@ class PedidosController < ApplicationController
   end
   
   def stats
+		@compras_dia = Pedido.compras_dia
+		@compras_mes = Pedido.compras_mes
+		@compras_proveedor = Pedido.compras_proveedor
+
 		respond_to do |format|
 			format.html { render layout: "dataTables" }
 			format.pdf do
